@@ -1,0 +1,10 @@
+Modes
+-----------
+
+- No Client validation
+--- Keystore (standalone server, No load balancer) 
+--- Load balancer nginx/AWS
+
+- Client validation
+--- Keystore + TrustStore (standalone server, No load balancer) 
+--- Load balancer (can this be done) (http://nategood.com/client-side-certificate-authentication-in-ngi)
