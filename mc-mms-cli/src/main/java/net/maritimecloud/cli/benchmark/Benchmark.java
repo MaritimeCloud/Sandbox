@@ -17,10 +17,11 @@ package net.maritimecloud.cli.benchmark;
 import com.beust.jcommander.Parameter;
 import com.google.inject.Injector;
 import net.maritimecloud.cli.AbstractMMSCommandLineTool;
+import net.maritimecloud.cli.CliMmsClient;
 import net.maritimecloud.core.id.MmsiId;
 import net.maritimecloud.net.mms.MmsClient;
-import net.maritimecloud.net.mms.MmsClientConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -66,6 +67,7 @@ public class Benchmark extends AbstractMMSCommandLineTool {
     int n = 1;
 
     BenchmarkStats stats = new BenchmarkStats();
+    List<CliMmsClient> clients = new ArrayList<>();
     boolean aborted;
 
     /** {@inheritDoc} */
@@ -101,7 +103,8 @@ public class Benchmark extends AbstractMMSCommandLineTool {
             LOG.log(Level.SEVERE, "Error completing benchmark", e);
         }
 
-        // Print statistics
+        // Update and print statistics
+        clients.forEach(stats::update);
         LOG.info(stats.toString());
     }
 
@@ -135,16 +138,25 @@ public class Benchmark extends AbstractMMSCommandLineTool {
             for (int x = 0; !aborted && x < n; x++) {
                 try {
                     // Launch the client
-                    MmsClientConfiguration conf = MmsClientConfiguration.create(id);
-                    MmsClient mmsClient = createMmsClient(conf);
+                    CliMmsClient cliClient = createMmsClient(id);
+                    MmsClient mmsClient = cliClient.getMmsClient();
+                    clients.add(cliClient);
                     if (aborted) {
                         return;
                     }
                     stats.newConnection();
                     LOG.info("Connected successfully to cloud server: " + getHostURL() + " with shipId " + id);
 
-                    // Keep the client alive for the requested amount of time
-                    Thread.sleep(ttl);
+                    // Keep the client alive for at least the requested amount of time
+                    // However, ensure that the client is connected before continuing
+                    long t0 = System.currentTimeMillis();
+                    while (!aborted) {
+                        long dt = System.currentTimeMillis() - t0;
+                        if (cliClient.isConnected() && dt > ttl) {
+                            break;
+                        }
+                        Thread.sleep(5);
+                    }
                     if (aborted) {
                         return;
                     }
@@ -176,6 +188,8 @@ public class Benchmark extends AbstractMMSCommandLineTool {
         long t0 = System.currentTimeMillis();
         int connections;
         int errors;
+        int messagesReceived;
+        int messagesSent;
 
         /** Register a new connection */
         public synchronized void newConnection() {
@@ -187,6 +201,15 @@ public class Benchmark extends AbstractMMSCommandLineTool {
             errors++;
         }
 
+        /**
+         * Update the statistics with the statistics of the given client
+         * @param client the client to update the statistics for
+         */
+        public void update(CliMmsClient client) {
+            this.messagesSent += client.getMessagesSent();
+            this.messagesReceived += client.getMessagesReceived();
+        }
+
         /** {@inheritDoc} */
         @Override
         public String toString() {
@@ -194,6 +217,8 @@ public class Benchmark extends AbstractMMSCommandLineTool {
                     + "\n  Duration: " + ((System.currentTimeMillis() - t0) / 1000L) + " seconds"
                     + "\n  MMS Connections: " + connections
                     + "\n  MMS Errors: " + errors
+                    + "\n  Messages Received: " + messagesReceived
+                    + "\n  Messages Sent: " + messagesSent
                     ;
         }
     }

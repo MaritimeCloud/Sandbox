@@ -70,27 +70,18 @@ public abstract class AbstractMMSCommandLineTool extends AbstractCommandLineTool
     protected abstract void runMMSCommand(Injector injector) throws Exception;
 
     /**
-     * Utility method for creating an MMS client based on the given configuration.
-     * The configuration will be tied to a specific MMSI.
+     * Utility method for creating an MMS client based on an MMSI ID.
      *
-     * @param conf the MMS client configuration
+     * @param id the MMSI of the client
      * @return the MMS client
      */
-    protected MmsClient createMmsClient(MmsClientConfiguration conf) throws Exception {
+    protected CliMmsClient createMmsClient(MmsiId id) throws Exception {
 
-        if (conf.getPositionReader() == null) {
-            // Hook up a dummy position reader
-            conf.setPositionReader(new PositionReader() {
-                @Override
-                public PositionTime getCurrentPosition() {
-                    return PositionTime.create(0.0, 0.0, System.currentTimeMillis());
-                }
-            });
-        }
+        CliMmsClient client = new CliMmsClient(id, getHostURL());
 
         // Check if we need to log the MaritimeCloudConnection activity
         if (verbose) {
-            conf.addListener(new MmsConnection.Listener() {
+            client.getConf().addListener(new MmsConnection.Listener() {
                 @Override
                 public void connecting(URI host) {
                     LOG.info("Connecting to " + host);
@@ -128,15 +119,7 @@ public abstract class AbstractMMSCommandLineTool extends AbstractCommandLineTool
             });
         }
 
-        // Set the host
-        conf.setHost(getHostURL());
-
-        MmsClient mmsClient = conf.build();
-        if (mmsClient == null) {
-            throw new Exception("Failed creating MMS client");
-        }
-
-        return mmsClient;
+        return client;
     }
 
     /**
