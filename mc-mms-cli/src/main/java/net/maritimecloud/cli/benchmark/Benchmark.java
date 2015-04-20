@@ -31,6 +31,9 @@ import java.util.logging.Logger;
 /**
  * User for benchmarking the MMS server.
  * <p>
+ * Example usage:
+ * <pre>java -jar mc-mms-cli-0.3-SNAPSHOT.jar benchmark -ids 8880000,9990000-9990005 -n 3 -ttl 1000 -v wss://mms-test.e-navigation.net</pre>
+ * <p>
  * To a certain extent, the command has been modelled over the Apache Benchmark command:
  * http://httpd.apache.org/docs/2.2/programs/ab.html
  */
