@@ -24,12 +24,12 @@ import net.maritimecloud.net.mms.MmsConnection;
 import net.maritimecloud.net.mms.MmsConnectionClosingCode;
 import net.maritimecloud.util.geometry.PositionReader;
 import net.maritimecloud.util.geometry.PositionTime;
-import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Base class for MMS command line tools.
@@ -39,7 +39,7 @@ import java.util.List;
  */
 public abstract class AbstractMMSCommandLineTool extends AbstractCommandLineTool {
 
-    static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AbstractMMSCommandLineTool.class);
+    static final Logger LOG = Logger.getLogger(AbstractMMSCommandLineTool.class.getName());
 
     /** Default parameter - the MMS server URL */
     @SuppressWarnings("all")
@@ -180,15 +180,4 @@ public abstract class AbstractMMSCommandLineTool extends AbstractCommandLineTool
         return result;
     }
 
-    /**
-     * Utility method for sleeping the current thread the given amount of time
-     * @param ms the time to sleep
-     */
-    public void sleep(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            LOG.error("Alas, cannot even sleep properly");
-        }
-    }
 }
