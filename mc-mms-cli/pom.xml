@@ -31,6 +31,7 @@
     <name>MaritimeCloud MMS CLI</name>
 
     <properties>
+        <java.version>1.8</java.version>
         <maritime.cloud.version>0.3-SNAPSHOT</maritime.cloud.version>
         <dma.commons.version>0.3-SNAPSHOT</dma.commons.version>
     </properties>
@@ -88,6 +89,17 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <compilerArgument>-parameters</compilerArgument>
+                    <testCompilerArgument>-parameters</testCompilerArgument>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
