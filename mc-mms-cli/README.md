@@ -54,7 +54,7 @@ To run the docker image, use the following format:
 
 **docker run -e "ARGUMENTS=[arguments]"  dmadk/mc-mms-cli**
 
-- where the *arguments* takes the format described above. Example:
+Where the *arguments* takes the format described above. Example:
 
     docker run -e \
         "ARGUMENTS=benchmark ids 266081000,269837000 -n 100 -broadcasts 1 wss://mms-test.e-navigation.net" \
