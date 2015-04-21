@@ -9,7 +9,7 @@ Initially, there is a benchmark tool available.
 
 * Java 8
 * Maven (for building)
-* A running and compatible MMS server to test agains
+* A running and compatible MMS server to test against
 
 ## Building ##
 
@@ -38,7 +38,9 @@ The benchmark tool is invoked using the following format:
 
 Example:
 
-    java -jar target/mc-mms-cli-0.3-SNAPSHOT.jar benchmark -ids 266081000,222000000-222000010 -c 6 -n 2 -ttl 2000 -broadcasts 1 -invocations 1 -bin wss://mms-test.e-navigation.net
+    java -jar target/mc-mms-cli-0.3-SNAPSHOT.jar benchmark \
+        -ids 266081000,222000000-222000010 -c 6 -n 2 -ttl 2000 \
+        -broadcasts 1 -invocations 1 -bin wss://mms-test.e-navigation.net
     
 ## Docker
 
@@ -50,8 +52,10 @@ To pull the docker image, use:
 
 To run the docker image, use the following format:
 
-**docker run -e "ARGUMENTS=[arguments]"  dmadk/mc-mms-cli**, where the *arguments* takes the format described above.
+**docker run -e "ARGUMENTS=[arguments]"  dmadk/mc-mms-cli**
 
-Example:
+- where the *arguments* takes the format described above. Example:
 
-    docker run -e "ARGUMENTS=benchmark ids 266081000,269837000 -n 100 -broadcasts 1 wss://mms-test.e-navigation.net"  dmadk/mc-mms-cli
+    docker run -e \
+        "ARGUMENTS=benchmark ids 266081000,269837000 -n 100 -broadcasts 1 wss://mms-test.e-navigation.net" \
+        dmadk/mc-mms-cli
