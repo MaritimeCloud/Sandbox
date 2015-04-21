@@ -32,7 +32,11 @@ public class CliMmsClient implements MmsConnection.Listener {
 
     final MmsClient mmsClient;
     final MmsClientConfiguration conf;
+
+    /** Signals that the client at some point of time got connected */
     boolean connected;
+
+    /** Signals that the client at some point of time got disconnected */
     boolean disconnected;
     int messagesReceived;
     int messagesSent;
@@ -98,7 +102,6 @@ public class CliMmsClient implements MmsConnection.Listener {
     @Override
     public void disconnected(MmsConnectionClosingCode closeReason) {
         disconnected = true;
-        connected = false;
     }
 
     // ** Getters **/

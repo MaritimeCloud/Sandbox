@@ -19,13 +19,13 @@ import com.google.inject.Injector;
 import net.maritimecloud.cli.AbstractMMSCommandLineTool;
 import net.maritimecloud.cli.CliMmsClient;
 import net.maritimecloud.core.id.MmsiId;
-import net.maritimecloud.net.mms.MmsClient;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,7 +43,7 @@ public class Benchmark extends AbstractMMSCommandLineTool {
     static final Logger LOG = Logger.getLogger(Benchmark.class.getName());
 
     /** Parameter for specifying a single MMSI ID */
-    @Parameter(names="-id", description = "MMSI ID")
+    @Parameter(names="-id", description = "A single MMSI ID")
     Integer id = null;
 
     /** Parameter for specifying a list of MMSI ID's */
@@ -51,19 +51,27 @@ public class Benchmark extends AbstractMMSCommandLineTool {
     String ids = null;
 
     /** Parameter for specifying the time-to-live of the client connection */
-    @Parameter(names="-ttl", description = "Time-to-live of the client connection in milliseconds")
+    @Parameter(names="-ttl", description = "Minimum time-to-live of the client connection in milliseconds")
     long ttl = 4000L; // milliseconds
 
+    /** Parameter for specifying the number of broadcasts to send per connection */
+    @Parameter(names="-broadcasts", description = "Number of broadcasts to send per client connection")
+    int broadcasts = 0;
+
+    /** Parameter for specifying the number of endpoint invocations to perform per connection */
+    @Parameter(names="-invocations", description = "Number of endpoint invocations to perform per client connection")
+    int invocations = 0;
+
     /** Parameter for specifying the time limit of the benchmark test in seconds */
-    @Parameter(names="-t", description = "Time limit of the benchmark test in seconds")
-    long timeLimit = 60 * 60L; // Seconds
+    @Parameter(names="-t", description = "Maximum duration of the benchmark test in seconds")
+    long timeLimit = 24 * 60 * 60L; // Seconds
 
     /** Parameter for specifying the number of concurrent clients */
     @Parameter(names="-c", description = "The number of concurrent clients. By default this will be identical to the number of MMSI ID's")
     Integer c = null;
 
     /** Parameter for specifying the number of connections for each client */
-    @Parameter(names="-n", description = "The number of connections for each client")
+    @Parameter(names="-n", description = "The number of iterations for each client")
     int n = 1;
 
     BenchmarkStats stats = new BenchmarkStats();
@@ -125,53 +133,22 @@ public class Benchmark extends AbstractMMSCommandLineTool {
 
         /**
          * Constructor
+         *
          * @param id the MMSI of the client
          */
         public MmsClientBenchmarkJob(MmsiId id) {
             this.id = id;
         }
 
-        /** {@inheritDoc} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void run() {
             // Repeat the connection test n times
             for (int x = 0; !aborted && x < n; x++) {
                 try {
-                    // Launch the client
-                    CliMmsClient cliClient = createMmsClient(id);
-                    MmsClient mmsClient = cliClient.getMmsClient();
-                    clients.add(cliClient);
-                    if (aborted) {
-                        return;
-                    }
-                    stats.newConnection();
-                    LOG.info("Connected successfully to cloud server: " + getHostURL() + " with shipId " + id);
-
-                    // Keep the client alive for at least the requested amount of time
-                    // However, ensure that the client is connected before continuing
-                    long t0 = System.currentTimeMillis();
-                    while (!aborted) {
-                        long dt = System.currentTimeMillis() - t0;
-                        if (cliClient.isConnected() && dt > ttl) {
-                            break;
-                        }
-                        Thread.sleep(5);
-                    }
-                    if (aborted) {
-                        return;
-                    }
-
-                    // Shut down the client
-                    mmsClient.shutdown();
-                    mmsClient.awaitTermination(2, TimeUnit.SECONDS);
-                    if (aborted) {
-                        return;
-                    }
-                    LOG.info("Terminated the MMS client " + mmsClient.getClientId());
-
-                    // Sleep a bit to ensure that the connection is shut down
-                    Thread.sleep(100);
-
+                    executeSingleClientConnection();
                 } catch (Exception ex) {
                     stats.newError();
                     if (aborted) {
@@ -181,15 +158,104 @@ public class Benchmark extends AbstractMMSCommandLineTool {
                 }
             }
         }
+
+        /**
+         * Creates a client connection, performs the operations specified by the
+         * command line arguments, and closes the connection again
+         */
+        private void executeSingleClientConnection() throws Exception {
+            // Launch the client
+            CliMmsClient cliClient = setupConnection();
+
+            long t0 = System.currentTimeMillis();
+
+            // Make sure we are connected
+            while (!aborted && !cliClient.isConnected() && System.currentTimeMillis() - t0 < ttl) {
+                Thread.sleep(5);
+            }
+
+            // Test the MMS connection according to the procedure specified by command line arguments
+            testConnection(cliClient);
+
+            // Keep the client alive for at least the requested amount of time
+            while (!aborted && System.currentTimeMillis() - t0 < ttl) {
+                Thread.sleep(5);
+            }
+
+            // Shut down the client
+            shutdownConnection(cliClient);
+        }
+
+        /**
+         * Create an MMS client connection
+         */
+        private CliMmsClient setupConnection() throws Exception {
+            // Launch the client
+            CliMmsClient client = createMmsClient(id);
+            clients.add(client);
+            stats.newConnection();
+            LOG.info("Connected successfully to cloud server: " + getHostURL() + " with shipId " + id);
+            return client;
+        }
+
+        /**
+         * Test the MMS client connection according to the command line arguments
+         * @param client the MMS client
+         */
+        private void testConnection(CliMmsClient client) throws Exception {
+            // Send broadcasts
+            for (int i = 0; !aborted && i < broadcasts; i++) {
+                client.getMmsClient().broadcast(new TestBroadcastMessage("Message" + i, i));
+                stats.newBroadcast();
+            }
+
+            // Register as endpoint and invoke a remote endpoint
+            if (!aborted && invocations > 0) {
+                client.getMmsClient().endpointRegister(new TestEndpointImpl());
+                stats.newEndpointRegistration();
+
+                try {
+                    // NB: Will only work if another connection currently has a registered endpoint
+                    TestEndpoint endpoint = client.getMmsClient().endpointLocate(TestEndpoint.class).findNearest().get(100, TimeUnit.MILLISECONDS);
+                    for (int i = 0; !aborted && endpoint != null && i < invocations; i++) {
+                        endpoint.test();
+                        stats.newEndpointInvocation();
+                    }
+                } catch (TimeoutException e) {
+                    // That's OK, currently no registered service
+                    LOG.log(Level.FINER, "Failed calling endpoint");
+                }
+            }
+        }
+
+        /**
+         * Shut down the MMS client connection
+         * @param client the MMS client
+         */
+        private void shutdownConnection(CliMmsClient client) throws Exception {
+            if (!aborted) {
+                client.getMmsClient().shutdown();
+                client.getMmsClient().awaitTermination(2, TimeUnit.SECONDS);
+                LOG.info("Terminated the MMS client " + client.getMmsClient().getClientId());
+
+                // Sleep a bit to ensure that the connection is shut down
+                Thread.sleep(100);
+            }
+        }
     }
 
-    /** Compiles the benchmark statistics */
+    /**
+     * Used for compiling the benchmark statistics
+     */
     class BenchmarkStats {
         long t0 = System.currentTimeMillis();
         int connections;
         int errors;
         int messagesReceived;
         int messagesSent;
+        int endpointRegistrations;
+        int endpointInvocations;
+        int broadcasts;
 
         /** Register a new connection */
         public synchronized void newConnection() {
@@ -199,6 +265,21 @@ public class Benchmark extends AbstractMMSCommandLineTool {
         /** Register a new error */
         public void newError() {
             errors++;
+        }
+
+        /** Register a new endpoint registration */
+        public void newEndpointRegistration() {
+            endpointRegistrations++;
+        }
+
+        /** Register a new endpoint invocations */
+        public void newEndpointInvocation() {
+            endpointInvocations++;
+        }
+
+        /** Register a new broadcast */
+        public void newBroadcast() {
+            broadcasts++;
         }
 
         /**
@@ -219,6 +300,9 @@ public class Benchmark extends AbstractMMSCommandLineTool {
                     + "\n  MMS Errors: " + errors
                     + "\n  Messages Received: " + messagesReceived
                     + "\n  Messages Sent: " + messagesSent
+                    + "\n  Endpoint Registrations: " + endpointRegistrations
+                    + "\n  Endpoint Invocations: " + endpointInvocations
+                    + "\n  Broadcasts: " + broadcasts
                     ;
         }
     }

@@ -18,12 +18,8 @@ import com.beust.jcommander.Parameter;
 import com.google.inject.Injector;
 import dk.dma.commons.app.AbstractCommandLineTool;
 import net.maritimecloud.core.id.MmsiId;
-import net.maritimecloud.net.mms.MmsClient;
-import net.maritimecloud.net.mms.MmsClientConfiguration;
 import net.maritimecloud.net.mms.MmsConnection;
 import net.maritimecloud.net.mms.MmsConnectionClosingCode;
-import net.maritimecloud.util.geometry.PositionReader;
-import net.maritimecloud.util.geometry.PositionTime;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -46,10 +42,10 @@ public abstract class AbstractMMSCommandLineTool extends AbstractCommandLineTool
     @Parameter(description = "ws[s]://hostname[:port]", required = true)
     private List<String> server = new ArrayList<>();
 
-    @Parameter(names={ "-v", "--verbose" }, description = "Verbosity")
+    @Parameter(names={ "-v", "--verbose" }, description = "Turn on verbosity")
     boolean verbose = false;
 
-    @Parameter(names={ "-bin" }, description = "Will use a binary Protobuf protocol instead of a text-based JSON protocol")
+    @Parameter(names={ "-bin" }, description = "Use the binary Protobuf protocol instead of a text-based JSON protocol")
     boolean binary = false;
 
     /** {@inheritDoc} */
