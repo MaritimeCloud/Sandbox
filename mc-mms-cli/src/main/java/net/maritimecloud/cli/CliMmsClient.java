@@ -50,7 +50,7 @@ public class CliMmsClient implements MmsConnection.Listener {
         conf = MmsClientConfiguration.create(id);
 
         // Register as a listener
-        conf.addConnectionListener(this);
+        conf.addListener(this);
 
         // Hook up a dummy position reader
         conf.setPositionReader(new PositionReader() {
