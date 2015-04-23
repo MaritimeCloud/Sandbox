@@ -40,7 +40,7 @@ public abstract class AbstractMMSCommandLineTool extends AbstractCommandLineTool
     /** Default parameter - the MMS server URL */
     @SuppressWarnings("all")
     @Parameter(description = "ws[s]://hostname[:port]", required = true)
-    private List<String> server = new ArrayList<>();
+    protected List<String> server = new ArrayList<>();
 
     @Parameter(names={ "-v", "--verbose" }, description = "Turn on verbosity")
     boolean verbose = false;

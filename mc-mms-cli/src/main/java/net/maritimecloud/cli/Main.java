@@ -34,6 +34,7 @@ public class Main {
         CliCommandList c = new CliCommandList("MmsCli");
 
         c.add(Benchmark.class, "benchmark", "Benchmarks the MMS server");
+        c.add(Benchmark.class, "proxy", "Runs a proxy MMS server");
 
         try {
             c.invoke(args);
