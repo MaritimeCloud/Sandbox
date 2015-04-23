@@ -17,8 +17,8 @@ package net.maritimecloud.cli;
 import net.maritimecloud.core.id.MmsiId;
 import net.maritimecloud.net.mms.MmsClient;
 import net.maritimecloud.net.mms.MmsClientConfiguration;
+import net.maritimecloud.net.mms.MmsConnection;
 import net.maritimecloud.net.mms.MmsConnectionClosingCode;
-import net.maritimecloud.net.mms.MmsConnectionListener;
 import net.maritimecloud.util.geometry.PositionReader;
 import net.maritimecloud.util.geometry.PositionTime;
 
@@ -28,7 +28,7 @@ import java.net.URI;
  * Encapsulates an MMS Client and compiles statistics for the client
  */
 @SuppressWarnings("unused")
-public class CliMmsClient implements MmsConnectionListener {
+public class CliMmsClient implements MmsConnection.Listener {
 
     final MmsClient mmsClient;
     final MmsClientConfiguration conf;
