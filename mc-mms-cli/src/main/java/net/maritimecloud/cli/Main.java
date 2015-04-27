@@ -16,6 +16,7 @@ package net.maritimecloud.cli;
 
 import dk.dma.commons.app.CliCommandList;
 import net.maritimecloud.cli.benchmark.Benchmark;
+import net.maritimecloud.cli.proxy.Proxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +35,7 @@ public class Main {
         CliCommandList c = new CliCommandList("MmsCli");
 
         c.add(Benchmark.class, "benchmark", "Benchmarks the MMS server");
-        c.add(Benchmark.class, "proxy", "Runs a proxy MMS server");
+        c.add(Proxy.class, "proxy", "Runs a proxy MMS server");
 
         try {
             c.invoke(args);

@@ -22,13 +22,16 @@ import java.net.InetSocketAddress;
 import java.util.logging.Logger;
 
 /**
- * IMPORTANT: This is work in progress - does not yet work...
+ * IMPORTANT: This is work in progress. The proxy works fine if it targets an MMS server directly.
+ * However, if the target server is, say, an nginx MMS proxy, this class does not work at all.<br/>
+ * Maybe the "Host" header of the initial HTTP upgrade request needs to be re-written. Investigate...
+ *
  * <p>
  * Starts an MMS proxy server that can be used for testing
  * dropped connections, re-connects, etc.
  * <p>
  * Example usage:
- * <pre>java -jar mc-mms-cli-0.3-SNAPSHOT.jar benchmark -port 43234 mms-test.e-navigation.net:80</pre>
+ * <pre>java -jar mc-mms-cli-0.3-SNAPSHOT.jar proxy -port 43234 mms-test.e-navigation.net:43234</pre>
  *
  */
 public class Proxy extends AbstractMMSCommandLineTool {
