@@ -30,5 +30,6 @@
 
   <modules>
     <module>mc-mms-tls-server</module>
+    <module>mc-mms-tls-client-jetty-standalone</module>
   </modules>
 </project>
