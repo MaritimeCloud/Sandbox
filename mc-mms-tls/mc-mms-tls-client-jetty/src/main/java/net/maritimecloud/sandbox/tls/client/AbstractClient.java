@@ -21,5 +21,5 @@ import java.net.URI;
  * @author Kasper Nielsen
  */
 public abstract class AbstractClient {
-    static final URI WSS = URI.create("wss://localhost:8443/websockettest/");
+    public static final URI WSS = URI.create("wss://localhost:8443/websockettest/");
 }

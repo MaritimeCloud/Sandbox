@@ -20,19 +20,17 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
  *
  * @author Kasper Nielsen
  */
-public class SSLServerWithClientCertificateValidation extends AbstractSSLServer {
-
+public class SSL_CustomCertificate extends AbstractSSLServer {
     public static void main(String[] args) throws Exception {
-        new SSLServerWithClientCertificateValidation().start(args);
-        // DOES NOT WORK YET
+        new SSL_CustomCertificate().start(args);
     }
 
     /** {@inheritDoc} */
     @Override
     protected void configure(SslContextFactory sslContextFactory) {
-        sslContextFactory.setNeedClientAuth(true);
-        sslContextFactory.setTrustStorePath("src/main/resources/server-truststore.jks");
-        sslContextFactory.setTrustStorePassword("changeit");
+        sslContextFactory.setKeyStorePath("_cert/keystore.jks");
+        sslContextFactory.setKeyStorePassword("keystore");
+        sslContextFactory.setKeyManagerPassword("Julemand11");
     }
 
 }

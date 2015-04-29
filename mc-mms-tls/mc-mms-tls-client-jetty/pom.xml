@@ -17,16 +17,15 @@
   </parent>
 
 
-  <artifactId>mc-mms-tls-server</artifactId>
+  <artifactId>mc-mms-tls-client-jetty</artifactId>
   <name>MaritimeCloud Core</name>
 
   <dependencies>
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
-      <artifactId>javax-websocket-server-impl</artifactId>
+      <artifactId>javax-websocket-client-impl</artifactId>
       <version>${dependencies.jetty.version}</version>
     </dependency>
   </dependencies>
 
- 
 </project>

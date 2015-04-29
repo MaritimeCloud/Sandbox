@@ -14,6 +14,8 @@
  */
 package net.maritimecloud.sandbox.tls.server;
 
+import net.maritimecloud.sandbox.tls.server.util.SimpleEndpoint;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;

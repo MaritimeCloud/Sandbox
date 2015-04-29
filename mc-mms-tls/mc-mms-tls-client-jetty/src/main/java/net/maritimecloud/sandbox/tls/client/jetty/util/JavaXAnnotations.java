@@ -1,4 +1,4 @@
-package net.maritimecloud.sandbox.tls.client.util;
+package net.maritimecloud.sandbox.tls.client.jetty.util;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
@@ -13,7 +13,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 
 @ClientEndpoint
-public class JavaXListener {
+public class JavaXAnnotations {
 
     public final CountDownLatch done = new CountDownLatch(1);
 

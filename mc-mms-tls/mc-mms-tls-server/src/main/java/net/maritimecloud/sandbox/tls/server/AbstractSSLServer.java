@@ -14,6 +14,8 @@
  */
 package net.maritimecloud.sandbox.tls.server;
 
+import net.maritimecloud.sandbox.tls.server.util.SimpleEndpoint;
+
 import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
@@ -77,7 +79,6 @@ public class AbstractSSLServer {
 
         server.start();
         // server.dump(System.err);
-        System.out.println("RUNNING");
         server.join();
     }
 

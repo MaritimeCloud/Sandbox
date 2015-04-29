@@ -17,16 +17,14 @@
   </parent>
 
 
-  <artifactId>mc-mms-tls-server</artifactId>
-  <name>MaritimeCloud Core</name>
+  <artifactId>mc-mms-tls-client-tomcat</artifactId>
+  <name>TLS Client Tomcat</name>
 
   <dependencies>
     <dependency>
-      <groupId>org.eclipse.jetty.websocket</groupId>
-      <artifactId>javax-websocket-server-impl</artifactId>
-      <version>${dependencies.jetty.version}</version>
+       <groupId>org.apache.tomcat</groupId>
+       <artifactId>tomcat-websocket</artifactId>
+       <version>8.0.21</version>
     </dependency>
   </dependencies>
-
- 
 </project>

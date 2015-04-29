@@ -1,4 +1,4 @@
-package net.maritimecloud.sandbox.tls.server;
+package net.maritimecloud.sandbox.tls.server.util;
 
 import java.io.IOException;
 
