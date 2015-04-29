@@ -23,7 +23,7 @@
     <parent>
     <groupId>net.maritimecloud.sandbox</groupId>
     <artifactId>mc-sandbox-parent</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.1</version>
     </parent>
 
     <packaging>jar</packaging>
