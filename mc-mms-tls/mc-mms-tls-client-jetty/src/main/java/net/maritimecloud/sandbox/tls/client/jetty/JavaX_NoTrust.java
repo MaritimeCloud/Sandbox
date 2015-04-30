@@ -16,7 +16,7 @@ public class JavaX_NoTrust extends AbstractClient {
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
         try {
             JavaXAnnotations es = new JavaXAnnotations();
-            try (Session session = container.connectToServer(es, WSS)) {
+            try (Session session = container.connectToServer(es, CUSTOM_WSS)) {
                 es.assertDone();
             }
         } finally {

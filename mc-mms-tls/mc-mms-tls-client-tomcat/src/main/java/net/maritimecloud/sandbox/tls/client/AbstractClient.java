@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
  */
 public abstract class AbstractClient {
     public static final URI WSS = URI.create("wss://localhost:8443/websockettest/");
+    public static final URI CUSTOM_WSS = URI.create("wss://localhost.maritimecloud.net:8443/websockettest/");
 
     /** returns the file path to the given resource */
     public static String getResourcePath(String resource) throws URISyntaxException {

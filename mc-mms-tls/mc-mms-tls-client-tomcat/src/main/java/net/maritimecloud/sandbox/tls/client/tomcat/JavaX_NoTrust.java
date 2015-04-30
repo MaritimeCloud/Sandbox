@@ -11,12 +11,11 @@ import org.apache.tomcat.websocket.WsWebSocketContainer;
 
 public class JavaX_NoTrust extends AbstractClient {
     public static void main(String[] args) throws Exception {
-        // Needed because the server uses a self-signed certificate
 
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
         try {
             JavaXAnnotations es = new JavaXAnnotations();
-            try (Session session = container.connectToServer(es, WSS)) {
+            try (Session session = container.connectToServer(es, CUSTOM_WSS)) {
                 es.assertDone();
             }
         } finally {
