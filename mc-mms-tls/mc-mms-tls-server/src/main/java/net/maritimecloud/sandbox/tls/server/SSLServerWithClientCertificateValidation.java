@@ -23,6 +23,10 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 public class SSLServerWithClientCertificateValidation extends AbstractSSLServer {
 
     public static void main(String[] args) throws Exception {
+        // Debug
+        //System.setProperty("javax.net.debug", "all");
+
+
         new SSLServerWithClientCertificateValidation().start(args);
         // DOES NOT WORK YET
     }

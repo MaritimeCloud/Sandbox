@@ -1,8 +1,8 @@
 package net.maritimecloud.sandbox.tls.client.tomcat;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.security.KeyStore;
+import net.maritimecloud.sandbox.tls.client.AbstractClient;
+import net.maritimecloud.sandbox.tls.client.tomcat.util.JavaXEndpoint;
+import org.apache.tomcat.websocket.WsWebSocketContainer;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -11,11 +11,7 @@ import javax.websocket.ClientEndpointConfig;
 import javax.websocket.ContainerProvider;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
-
-import net.maritimecloud.sandbox.tls.client.AbstractClient;
-import net.maritimecloud.sandbox.tls.client.tomcat.util.JavaXEndpoint;
-
-import org.apache.tomcat.websocket.WsWebSocketContainer;
+import java.security.KeyStore;
 
 public class JavaX_Programmatically extends AbstractClient {
 
