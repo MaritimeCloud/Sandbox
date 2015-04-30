@@ -12,7 +12,7 @@ import org.eclipse.jetty.util.component.LifeCycle;
 public class JavaX_SystemProperties extends AbstractClient {
     public static void main(String[] args) throws Exception {
         // Needed because the server uses a self-signed certificate
-        System.setProperty("javax.net.ssl.trustStore", "src/main/resources/client-truststore.jks");
+        System.setProperty("javax.net.ssl.trustStore", getResourcePath("client-truststore.jks"));
         System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
 
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();

@@ -15,7 +15,6 @@
 package net.maritimecloud.sandbox.tls.server;
 
 import net.maritimecloud.sandbox.tls.server.util.SimpleEndpoint;
-
 import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
@@ -48,7 +47,7 @@ public class AbstractSSLServer {
 
         // SSL Context Factory for HTTPS
         SslContextFactory sslContextFactory = new SslContextFactory();
-        sslContextFactory.setKeyStorePath("src/main/resources/server-keystore.jks");
+        sslContextFactory.setKeyStorePath(getResourcePath("server-keystore.jks"));
         sslContextFactory.setKeyStorePassword("changeit");
         sslContextFactory.setKeyManagerPassword("changeit");
 
@@ -83,4 +82,13 @@ public class AbstractSSLServer {
     }
 
     protected void configure(SslContextFactory factory) {}
+
+    /** returns the file path to the given resource */
+    public static String getResourcePath(String resource) {
+        try {
+            return AbstractSSLServer.class.getResource("/" + resource).toExternalForm().substring("file:".length());
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -15,6 +15,7 @@
 package net.maritimecloud.sandbox.tls.client;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  *
@@ -22,4 +23,9 @@ import java.net.URI;
  */
 public abstract class AbstractClient {
     public static final URI WSS = URI.create("wss://localhost:8443/websockettest/");
+
+    /** returns the file path to the given resource */
+    public static String getResourcePath(String resource) throws URISyntaxException {
+        return AbstractClient.class.getResource("/" + resource).toExternalForm().substring("file:".length());
+    }
 }

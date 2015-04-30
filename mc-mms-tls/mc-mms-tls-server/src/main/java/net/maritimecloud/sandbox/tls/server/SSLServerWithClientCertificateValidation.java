@@ -31,7 +31,7 @@ public class SSLServerWithClientCertificateValidation extends AbstractSSLServer 
     @Override
     protected void configure(SslContextFactory sslContextFactory) {
         sslContextFactory.setNeedClientAuth(true);
-        sslContextFactory.setTrustStorePath("src/main/resources/server-truststore.jks");
+        sslContextFactory.setTrustStorePath(getResourcePath("server-truststore.jks"));
         sslContextFactory.setTrustStorePassword("changeit");
     }
 

@@ -24,9 +24,7 @@ public class JavaX_Programmatically extends AbstractClient {
         TrustManagerFactory instance = TrustManagerFactory.getInstance(defaultAlgorithm);
         KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
 
-        try (FileInputStream instream = new FileInputStream(new File("src/main/resources/client-truststore.jks"))) {
-            trustStore.load(instream, "changeit".toCharArray());
-        }
+        trustStore.load(JavaX_Programmatically.class.getResourceAsStream("/client-truststore.jks"), "changeit".toCharArray());
 
         instance.init(trustStore);
         return instance.getTrustManagers();
