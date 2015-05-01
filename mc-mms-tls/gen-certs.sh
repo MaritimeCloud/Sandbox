@@ -2,9 +2,9 @@
 # echo: Check out: https://sites.google.com/site/paratumignempetere/software-development/security/mutually-authenticated-secure-socket-layer
 
 echo "Generating self-signed certificate keystores and truststores"
-keytool -keystore server-keystore.jks -genkey -v -keyalg RSA -alias server -storepass changeit -keypass changeit -dname "CN=localhost, OU=Server, O=Unknown, L=Unknown, ST=Unknown, C=Unknown"
+keytool -keystore server-keystore.jks -genkey -v -keyalg RSA -alias server -storepass changeit -keypass changeit -validity 3650 -dname "CN=localhost, OU=Server, O=Unknown, L=Unknown, ST=Unknown, C=Unknown"
 keytool -keystore server-keystore.jks -exportcert -v -alias server -storepass changeit -file server.der
-keytool -keystore client-keystore.jks -genkey -v -keyalg RSA -alias client -storepass changeit -keypass changeit -dname "CN=localhost, OU=Client, O=Unknown, L=Unknown, ST=Unknown, C=Unknown"
+keytool -keystore client-keystore.jks -genkey -v -keyalg RSA -alias client -storepass changeit -keypass changeit -validity 3650 -dname "CN=219622000, O=Scandlines, C=DK"
 keytool -keystore client-keystore.jks -exportcert -v -alias client -storepass changeit -file client.der
 keytool -keystore server-truststore.jks -importcert -v -noprompt -trustcacerts -storepass changeit -alias client -file client.der
 keytool -keystore client-truststore.jks -importcert -v -noprompt -trustcacerts -storepass changeit -alias server -file server.der
