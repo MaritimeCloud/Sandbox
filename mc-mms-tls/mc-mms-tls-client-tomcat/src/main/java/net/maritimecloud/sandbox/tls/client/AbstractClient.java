@@ -14,8 +14,13 @@
  */
 package net.maritimecloud.sandbox.tls.client;
 
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.KeyStore;
 
 /**
  *
@@ -24,6 +29,37 @@ import java.net.URISyntaxException;
 public abstract class AbstractClient {
     public static final URI WSS = URI.create("wss://localhost:8443/websockettest/");
     public static final URI CUSTOM_WSS = URI.create("wss://localhost.maritimecloud.net:8443/websockettest/");
+
+    /**
+     * Loads the truststore with the self-signed certificate used by the server
+     * @return the trust store managers
+     */
+    public static TrustManager[] loadTrustStore() throws Exception {
+        String defaultAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+        TrustManagerFactory instance = TrustManagerFactory.getInstance(defaultAlgorithm);
+        KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+
+        trustStore.load(AbstractClient.class.getResourceAsStream("/client-truststore.jks"), "changeit".toCharArray());
+
+        instance.init(trustStore);
+        return instance.getTrustManagers();
+    }
+
+    /**
+     * Loads the truststore with a self-signed certificate used by the client
+     * @return the trust store managers
+     */
+    public static KeyManager[] loadKeyManagers() throws Exception {
+        String defaultAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
+        KeyManagerFactory instance = KeyManagerFactory.getInstance(defaultAlgorithm);
+        KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+
+        keyStore.load(AbstractClient.class.getResourceAsStream("/client-keystore.jks"), "changeit".toCharArray());
+
+        instance.init(keyStore, "changeit".toCharArray());
+        return instance.getKeyManagers();
+    }
+
 
     /** returns the file path to the given resource */
     public static String getResourcePath(String resource) throws URISyntaxException {
