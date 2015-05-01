@@ -26,9 +26,7 @@ public class SSLServerWithClientCertificateValidation extends AbstractSSLServer 
         // Debug
         //System.setProperty("javax.net.debug", "all");
 
-
         new SSLServerWithClientCertificateValidation().start(args);
-        // DOES NOT WORK YET
     }
 
     /** {@inheritDoc} */
