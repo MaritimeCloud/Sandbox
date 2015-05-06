@@ -21,8 +21,8 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
  *  <ul>
  *      <li>You have added localhost.maritimecloud.net for localhost in /etc/hosts</li>
  *      <li>The keystore should be placed at ~/cert/maritimecloud.net.jks</li>
- *      <li>The java class must be run with system properties for KeyStorePassword and KeyManagerPassword, i.e.
- *      -DKeyStorePassword=XXX -DKeyManagerPassword=YYY</li>
+ *      <li>The java class must be run with a system property for KeyStorePassword, i.e.
+ *      -DKeyStorePassword=XXX</li>
  *  </ul>
  *
  *
@@ -39,10 +39,8 @@ public class SSL_CustomCertificate extends AbstractSSLServer {
     protected void configure(SslContextFactory sslContextFactory) {
         System.out.println("Using Key Store: " + System.getProperty("user.home") + "/cert/maritimecloud.net.jks");
         System.out.println("Using KeyStorePassword: " + System.getProperty("KeyStorePassword"));
-        System.out.println("Using KeyManagerPassword: " + System.getProperty("KeyManagerPassword"));
         sslContextFactory.setKeyStorePath(System.getProperty("user.home") + "/cert/maritimecloud.net.jks");
         sslContextFactory.setKeyStorePassword(System.getProperty("KeyStorePassword"));
-        sslContextFactory.setKeyManagerPassword(System.getProperty("KeyManagerPassword"));
     }
 
 }

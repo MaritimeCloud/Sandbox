@@ -63,7 +63,7 @@ public class JavaX_ClientCertificate extends AbstractClient {
 
                 // Send a client certificate from our keystore
                 sslContextFactory.setKeyStorePath(getResourcePath("client-keystore.jks"));
-                sslContextFactory.setKeyManagerPassword("changeit");
+                sslContextFactory.setKeyStorePassword("changeit");
 
 
                 container.start();

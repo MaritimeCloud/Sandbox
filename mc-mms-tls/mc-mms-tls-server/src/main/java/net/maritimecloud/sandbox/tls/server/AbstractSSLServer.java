@@ -49,7 +49,6 @@ public class AbstractSSLServer {
         SslContextFactory sslContextFactory = new SslContextFactory();
         sslContextFactory.setKeyStorePath(getResourcePath("server-keystore.jks"));
         sslContextFactory.setKeyStorePassword("changeit");
-        sslContextFactory.setKeyManagerPassword("changeit");
 
         configure(sslContextFactory);
 

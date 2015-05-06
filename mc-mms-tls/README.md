@@ -38,7 +38,7 @@ Next, ensure that
 * The keystore should be placed at ~/cert/maritimecloud.net.jks
 
 Start the websocket server using the class: _SSL_CustomCertificate_. 
-The java class must be run with system properties for KeyStorePassword and KeyManagerPassword, i.e. -DKeyStorePassword=XXX -DKeyManagerPassword=YYY.
+The java class must be run with a system property for KeyStorePassword, i.e. -DKeyStorePassword=XXX.
 
 Test the tomcat or jetty _JavaX_NoTrust_ clients.
 
