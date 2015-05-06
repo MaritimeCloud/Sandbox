@@ -48,7 +48,8 @@ Testing with SSL Proxy Server
 
 If you wish to test with a proxy-server, such as nginx, in front of MMS and use it to handle SSL-decryption, first convert the keystore to PKCS12:
   
-    keytool -importkeystore -srckeystore maritimecloud.net.jks -destkeystore maritimecloud.net.p12 -deststoretype PKCS12
+    keytool -importkeystore -srckeystore maritimecloud.net.jks \
+            -destkeystore maritimecloud.net.p12 -deststoretype PKCS12
 
 Extract the pem (certificate) and key from  p12 keystore:
 
