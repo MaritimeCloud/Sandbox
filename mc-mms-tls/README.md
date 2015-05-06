@@ -42,3 +42,18 @@ The java class must be run with system properties for KeyStorePassword and KeyMa
 
 Test the tomcat or jetty _JavaX_NoTrust_ clients.
 
+
+Testing with SSL Proxy Server
+=========================
+
+If you wish to test with a proxy-server, such as nginx, in front of MMS and use it to handle SSL-decryption, first convert the keystore to PKCS12:
+  
+    keytool -importkeystore -srckeystore maritimecloud.net.jks -destkeystore maritimecloud.net.p12 -deststoretype PKCS12
+
+Extract the pem (certificate) and key from  p12 keystore:
+
+    openssl  pkcs12 -nokeys -in maritimecloud.net.p12 -out nginx-ssl.pem
+    openssl pkcs12 -nocerts -nodes -in maritimecloud.net.p12 -out nginx-ssl.key
+
+Configure nginx to point to the pem and key files using the *ssl_certificate* and *ssl_certificate_key* parameters.
+
