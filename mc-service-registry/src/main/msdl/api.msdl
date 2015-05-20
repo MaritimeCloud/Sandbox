@@ -1,0 +1,45 @@
+message MsdlFile {
+    1: string fullname;
+    1: string owner;
+    1: string filename;
+    2: int64 createdAt;  
+    3: int64 updatedAt;
+    4: string shortDescription;
+    5: string descriptionHtml;
+    6: string descriptionMarkdown;
+    7: string currentVersion;
+    8: list<string> versions;
+}
+
+enum MsdlFileVersionStatus {
+
+}
+
+message MsdlFileVersion {
+    1: string name;
+    2: long createdAt;  
+    3: long updatedAt;
+    4: string shortDescription;
+    5: string descriptionHtml;
+    6: string descriptionMarkdown;
+    7: string currentVersion;
+    8: MsdlFileVersionStatus status;
+    9: string contents;
+}
+
+message MsdlFileObserve {
+   String path  //for example imo  , imo/routes , imo/routes/core
+   User user;
+   boolean email;
+}
+
+endpoint MsdlFileEndpoint {
+    createMsdlFile(1:MsdlFileCreate query);
+
+}
+
+message MsdlFileCreate {
+  1: string owner;
+  2: string filename;
+  3: string description;
+}

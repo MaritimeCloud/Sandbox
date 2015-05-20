@@ -1,0 +1,106 @@
+Create MSDL File
+-------
+Verify Create Parameters (Organization name, file name, description)
+  throw IAE
+Check Authorization (Also checks that organization exists)
+  throw security if not autotized
+Row Level transaction create file 
+  throw FileAlreadyExists
+//return showMSDLFile
+
+Returns MSDL_File
+
+SHOW MSDL File
+-------
+Verify Show Parameters (Organization name, file name)
+//No Auth
+Find And Load all versions:
+
+ Return MSDL_FILE
+
+
+
+Create Version
+Verify Create Parameters (Organization name, file name, version name, MSDL file)
+  throw IAE
+Check Authorization
+Check file exists
+Check later than latest version (row level lock) and unique
+create record
+//Send JMS message
+return showVersion
+
+ShowVersion
+  Verify Show Parameters (Organization name, file name, string version)
+ 
+
+
+
+
+
+MSDL file
+  Create
+  Show
+  Update (Description)
+  Delete/Deprecate
+  
+MSDL file version
+  Create
+  Show
+  Update (Description)
+  Delete
+  Release
+  Revoke
+
+
+
+
+
+
+
+
+
+
+
+
+Show 
+  GET /api/v1/msdl/:organization/:name
+  
+  parameters
+    version optional (latest if empty)
+  
+Create
+  POST /api/v1/box/:organization/:name
+  parameters
+    version required
+    
+Update
+  POST /api/v1/box/:organization/:name
+  parameters
+    version optional (latest if empty)
+  
+Delete
+  DELETE /api/v1/box/:organization/:name/version/:number
+  
+Release
+  PUT /api/v1/box/:organization/:name/version/:number/release
+
+Revoke
+  PUT /api/v1/box/:organization/:name/version/:number/revoke
+
+
+
+
+
+
+  "created_at": "2014-05-15T08:12:03.836Z",
+  "updated_at": "2014-05-15T08:12:03.836Z",
+  "tag": "kasperni/rotten-bear",
+  "name": "rotten-bear",
+  "short_description": null,
+  "description_html": "<p>testing the description field</p>\n",
+  "description_markdown": "testing the description field",
+  "username": "kasperni",
+  "private": false,
+  "current_version": null,
+  "versions": [
