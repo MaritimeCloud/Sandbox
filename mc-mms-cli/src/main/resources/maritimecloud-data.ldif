@@ -1,0 +1,52 @@
+
+# dn: dc=maritimecloud,dc=net
+# objectclass: top
+# objectclass: domain
+# dc: maritimecloud
+
+dn: ou=People,dc=maritimecloud,dc=net
+objectclass: top
+objectclass: organizationalUnit
+ou: People
+
+dn: ou=Groups,dc=maritimecloud,dc=net
+objectclass: top
+objectclass: organizationalUnit
+ou: Groups
+
+dn: ou=MMS Services,dc=maritimecloud,dc=net
+objectclass: top
+objectclass: organizationalUnit
+ou: MMS Services
+
+dn: ou=Vessels,dc=maritimecloud,dc=net
+objectclass: top
+objectclass: organizationalUnit
+ou: Vessels
+
+dn: uid=peder,ou=People,dc=maritimecloud,dc=net
+objectclass: top
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: peder
+cn: Peder Pedersen
+sn: Pedersen
+mail: peder@carolus.dk
+userpassword:: e1NTSEF9QTM3TkF4K0l1Z25UZS8vTHJPbWFOczdZeGVNSk4xeVQ=
+ou: People
+
+dn: cn=MMS Users,ou=Groups,dc=maritimecloud,dc=net
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: MMS Users
+uniqueMember: uid=peder,ou=People,dc=maritimecloud,dc=net
+
+dn: cn=Hamlet,ou=Vessels,dc=maritimecloud,dc=net
+objectclass: top
+objectclass: groupOfNames
+objectclass: vessel
+cn: Hamlet
+mmsi: 219622000
+imo: 9150030
+member: uid=peder,ou=People,dc=maritimecloud,dc=net
+

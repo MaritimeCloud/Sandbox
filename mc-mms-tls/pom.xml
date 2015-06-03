@@ -32,5 +32,6 @@
     <module>mc-mms-tls-server</module>
     <module>mc-mms-tls-client-jetty</module>
     <module>mc-mms-tls-client-tomcat</module>
+    <module>mc-mms-tls-client-javaee</module>
   </modules>
 </project>

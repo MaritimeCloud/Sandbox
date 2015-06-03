@@ -18,6 +18,7 @@ import com.beust.jcommander.Parameter;
 import com.google.inject.Injector;
 import dk.dma.commons.app.AbstractCommandLineTool;
 import net.maritimecloud.core.id.MmsiId;
+import net.maritimecloud.net.mms.MmsClientConfiguration;
 import net.maritimecloud.net.mms.MmsConnection;
 import net.maritimecloud.net.mms.MmsConnectionClosingCode;
 
@@ -48,13 +49,24 @@ public abstract class AbstractMMSCommandLineTool extends AbstractCommandLineTool
     @Parameter(names={ "-bin" }, description = "Use the binary Protobuf protocol instead of a text-based JSON protocol")
     boolean binary = false;
 
+    @Parameter(names = "-keystore", description = "The path to the key-store")
+    String keystore = null;
+
+    @Parameter(names = "-keystorePassword", description = "The password of the key-store")
+    String keystorePassword = null;
+
+    @Parameter(names = "-truststore", description = "The path to the trust-store")
+    String truststore = null;
+
+    @Parameter(names = "-truststorePassword", description = "The password of the trust-store")
+    String truststorePassword = null;
+
+    @Parameter(names = "-H", description = "Append header to upgrade request, i.e. 'Authorization: Basic ZXhhbXBsZXVzZXI6cHdk'")
+    List<String> headers = new ArrayList<>();
+
     /** {@inheritDoc} */
     @Override
     protected final void run(Injector injector) throws Exception {
-
-        // Set the wire protocol
-        System.setProperty("net.maritimecloud.mms.use_binary", String.valueOf(binary));
-
         // Run using sub-class implementation
         runMMSCommand(injector);
     }
@@ -73,7 +85,17 @@ public abstract class AbstractMMSCommandLineTool extends AbstractCommandLineTool
      */
     protected CliMmsClient createMmsClient(MmsiId id) throws Exception {
 
-        CliMmsClient client = new CliMmsClient(id, getHostURL());
+        MmsClientConfiguration conf = MmsClientConfiguration.create(id)
+            .setHost(getHostURL())
+            .setUseBinary(binary)
+            .setKeystore(keystore)
+            .setKeystorePassword(keystorePassword)
+            .setTruststore(truststore)
+            .setTruststorePassword(truststorePassword);
+
+        headers.forEach(h -> conf.getHeaders().put(h.substring(0, h.indexOf(":")), h.substring(h.indexOf(":") + 1).trim()));
+
+        CliMmsClient client = new CliMmsClient(conf);
 
         // Check if we need to log the MaritimeCloudConnection activity
         if (verbose) {

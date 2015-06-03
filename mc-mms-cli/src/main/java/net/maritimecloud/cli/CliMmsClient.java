@@ -43,24 +43,23 @@ public class CliMmsClient implements MmsConnection.Listener {
 
     /**
      * Constructor
-     * @param id the MMSI id of the given MMS client
-     * @param host the MMS host
+     * @param conf MMS Client configuration
      */
-    public CliMmsClient(MmsiId id, String host) throws Exception {
-        conf = MmsClientConfiguration.create(id);
+    public CliMmsClient(MmsClientConfiguration conf) throws Exception {
+        this.conf = conf;
 
         // Register as a listener
         conf.addListener(this);
 
         // Hook up a dummy position reader
-        conf.setPositionReader(new PositionReader() {
-            @Override
-            public PositionTime getCurrentPosition() {
-                return PositionTime.create(0.0, 0.0, System.currentTimeMillis());
-            }
-        });
-
-        conf.setHost(host);
+        if (conf.getPositionReader() == null) {
+            conf.setPositionReader(new PositionReader() {
+                @Override
+                public PositionTime getCurrentPosition() {
+                    return PositionTime.create(0.0, 0.0, System.currentTimeMillis());
+                }
+            });
+        }
 
         mmsClient = conf.build();
         if (mmsClient == null) {
