@@ -1,0 +1,8 @@
+See http://upnp.org/specs/smgt/UPnP-smgt-SensorDataModel-v1-Service.pdf Annex E Common DataItem Names.
+
+value
+
+vs
+
+value + unit
+  Mere praecis
