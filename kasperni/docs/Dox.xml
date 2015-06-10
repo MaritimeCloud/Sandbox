@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?Sample data created by UKHO using version 2.1 of the draft AtoN Application Schema?>
+<gml:FeatureCollection xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:a201="http://www.iho.int/A-201" xmlns:smil20="http://www.w3.org/2001/SMIL20/"
+  xmlns:smil20lang="http://www.w3.org/2001/SMIL20/Language" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  gml:id="_1" xsi:schemaLocation="http://www.iho.int/A-201 a201_AtoN_GML.xsd">
+  <gml:featureMember>
+    <a201:FloatingAtoN gml:id="_2">
+      <a201:geometry>
+        <gml:Point gml:id="_3">
+          <gml:pos>-0.68483 50.64309</gml:pos>
+        </gml:Point>
+      </a201:geometry>
+      <a201:atonID />
+      <a201:atonOwnerAuthority>Trinity House</a201:atonOwnerAuthority>
+      <a201:atonType>lit AtoN</a201:atonType>
+      <a201:commonName>Owers</a201:commonName>
+      <a201:horizontalAccuracy>20</a201:horizontalAccuracy>
+      <a201:ialaCategory>category 2</a201:ialaCategory>
+      <a201:ialaRegion>A</a201:ialaRegion>
+      <a201:internationalID>A4411</a201:internationalID>
+      <a201:locationID>1234</a201:locationID>
+      <a201:locationPortName>Channel</a201:locationPortName>
+      <a201:daymarkTopmark>
+        <a201:daymarkTopmark>
+          <a201:topmarkColour>black</a201:topmarkColour>
+          <a201:topmarkShape>2 cones (points downward)
+          </a201:topmarkShape>
+        </a201:daymarkTopmark>
+      </a201:daymarkTopmark>
+      <a201:markColour>yellow</a201:markColour>
+      <a201:markColour>black</a201:markColour>
+      <a201:shape>pillar</a201:shape>
+      <a201:equipmentRacon>
+        <a201:Racon gml:id="_4">
+          <a201:geometry />
+          <a201:atonID />
+          <a201:atonOwnerAuthority>Trinity House</a201:atonOwnerAuthority>
+          <a201:atonType>racon</a201:atonType>
+          <a201:horizontalAccuracy />
+          <a201:ialaCategory>category 2</a201:ialaCategory>
+          <a201:ialaRegion>A</a201:ialaRegion>
+          <a201:locationID>1234</a201:locationID>
+          <a201:locationPortName>Channel</a201:locationPortName>
+          <a201:raconCharacter>O</a201:raconCharacter>
+          <a201:raconType>UNKNOWN</a201:raconType>
+          <a201:raconRange>UNKNOWN</a201:raconRange>
+        </a201:Racon>
+      </a201:equipmentRacon>
+      <a201:Light gml:id="_5">
+        <a201:geometry xlink:href="_3" />
+        <a201:atonID />
+        <a201:atonOwnerAuthority>Trinity House</a201:atonOwnerAuthority>
+        <a201:atonType>lit AtoN</a201:atonType>
+        <a201:horizontalAccuracy>20</a201:horizontalAccuracy>
+        <a201:ialaCategory>category 2</a201:ialaCategory>
+        <a201:ialaRegion>A</a201:ialaRegion>
+        <a201:locationID>1234</a201:locationID>
+        <a201:locationPortName>Channel</a201:locationPortName>
+        <a201:lightColour>white</a201:lightColour>
+        <a201:nominalLightRange>UNKNOWN</a201:nominalLightRange>
+        <a201:rhythmOfLight>
+          <a201:rhythmOfLight>
+            <a201:equipmentLight>
+              <a201:lightDescription>Q(6)+LFl W 15s
+              </a201:lightDescription>
+              <a201:lightCharacteristic>quick-flash plus long                flash
+              </a201:lightCharacteristic>
+              <a201:signalGroup>(6)(1)</a201:signalGroup>
+              <a201:signalPeriod>15</a201:signalPeriod>
+            </a201:equipmentLight>
+          </a201:rhythmOfLight>
+        </a201:rhythmOfLight>
+      </a201:Light>
+      <a201:equipmentLight />
+    </a201:FloatingAtoN>
+  </gml:featureMember>
+</gml:FeatureCollection>
