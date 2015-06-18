@@ -35,11 +35,23 @@ mail: peder@carolus.dk
 userpassword:: e1NTSEF9QTM3TkF4K0l1Z25UZS8vTHJPbWFOczdZeGVNSk4xeVQ=
 ou: People
 
+dn: uid=mmsuser,ou=People,dc=maritimecloud,dc=net
+objectclass: top
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: mmsuser
+cn: MMS User
+sn: User
+mail: noreply@maritimecloud.net
+userpassword:: e1NTSEF9QTM3TkF4K0l1Z25UZS8vTHJPbWFOczdZeGVNSk4xeVQ=
+ou: People
+
 dn: cn=MMS Users,ou=Groups,dc=maritimecloud,dc=net
 objectClass: top
 objectClass: groupOfUniqueNames
 cn: MMS Users
 uniqueMember: uid=peder,ou=People,dc=maritimecloud,dc=net
+uniqueMember: uid=mmsuser,ou=People,dc=maritimecloud,dc=net
 
 dn: cn=Hamlet,ou=Vessels,dc=maritimecloud,dc=net
 objectclass: top
@@ -49,4 +61,5 @@ cn: Hamlet
 mmsi: 219622000
 imo: 9150030
 member: uid=peder,ou=People,dc=maritimecloud,dc=net
+member: uid=mmsuser,ou=People,dc=maritimecloud,dc=net
 
