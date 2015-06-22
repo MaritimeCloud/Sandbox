@@ -42,7 +42,7 @@ objectclass: inetOrgPerson
 uid: mmsuser
 cn: MMS User
 sn: User
-mail: noreply@maritimecloud.net
+mail: mmsuser@maritimecloud.net
 userpassword:: e1NTSEF9QTM3TkF4K0l1Z25UZS8vTHJPbWFOczdZeGVNSk4xeVQ=
 ou: People
 
