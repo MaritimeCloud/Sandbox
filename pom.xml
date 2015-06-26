@@ -41,5 +41,6 @@
   <modules>
     <module>mc-mms-cli</module>
     <module>mc-mms-tls</module>
+    <module>mc-mms-wildfly-client</module>
   </modules>
 </project>
