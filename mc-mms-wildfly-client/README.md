@@ -9,7 +9,8 @@ by the maven msdl plugin.
 To test that the resulting MmsTextService implementation works properly with standard JEE concepts such
 as injection and transactions, each message sent and received is persisted.
 
-Also, to test error handling, 50% of the calls will fail with an exception.
+Also, to test error handling, the messaging calls can be configured to fail with an exception. The error rate
+along with the MMS client configuration is configured in the *ApplicationStarter* class.
 
 Test sending MMS text messages to all registered *MaritimeTextingService* services using the REST endpoint:
 

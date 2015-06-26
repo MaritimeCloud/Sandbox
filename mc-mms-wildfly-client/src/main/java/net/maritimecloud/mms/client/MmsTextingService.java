@@ -34,12 +34,14 @@ public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
     @Resource
     SessionContext sessionContext;
 
+    public double errorRate = 0.0;
+
     /** Called when an MMS client calls this registered MMS chat service */
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void sendMessage(MessageHeader header, MaritimeText msg) {
         // Introduce some errors into the system
-        if (Math.random() < 0.5) {
+        if (Math.random() < errorRate) {
             sessionContext.setRollbackOnly();
             throw new RuntimeException("An error occurred");
         }
@@ -61,7 +63,7 @@ public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
         persist(txt);
 
         // Introduce some errors into the system
-        if (Math.random() < 0.5) {
+        if (Math.random() < errorRate) {
             sessionContext.setRollbackOnly();
             throw new Exception("An error occurred");
         }
