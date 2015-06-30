@@ -3,7 +3,7 @@ package net.maritimecloud.mms.client;
 import dma.messaging.MaritimeText;
 import dma.messaging.MaritimeTextingNotificationSeverity;
 import dma.messaging.MaritimeTextingService;
-import net.maritimecloud.mms.client.generated.AbstractMaritimeTextingServiceEJB;
+import net.maritimecloud.mms.client.generated.AbstractMaritimeTextingServiceBean;
 import net.maritimecloud.mms.client.model.ChatMessage;
 import net.maritimecloud.net.MessageHeader;
 
@@ -21,10 +21,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * MMS service interface.
+ * <p/>
+ * An actual implementation of the hypothetically auto-generated {@code AbstractMaritimeTextingServiceBean} service.
+ * <p/>
+ * Throws in some transaction handling, error conditions, and CDI injection to test that the service
+ * works in a JEE context.
  */
 @Startup
 @Singleton
-public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
+public class MmsTextingService extends AbstractMaritimeTextingServiceBean {
 
     @Inject
     private EntityManager em;
@@ -32,7 +37,7 @@ public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
     @Resource
     SessionContext sessionContext;
 
-    public double errorRate = 0.0;
+    private double errorRate = 0.0;
 
     /** Called when an MMS client calls this registered MMS chat service */
     @Override
@@ -91,5 +96,10 @@ public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
         System.out.println("DB contains " +
                 em.createNamedQuery("ChatMessage.selectAll").getResultList().size()
                 + " chat messages");
+    }
+
+    /** Sets the error rate */
+    public void setErrorRate(double errorRate) {
+        this.errorRate = errorRate;
     }
 }

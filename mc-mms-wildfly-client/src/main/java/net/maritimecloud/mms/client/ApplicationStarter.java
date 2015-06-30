@@ -32,16 +32,16 @@ public class ApplicationStarter {
     @PostConstruct
     public void startMmsService() {
 
-        textingService.errorRate = ERROR_RATE;
+        textingService.setErrorRate(ERROR_RATE);
 
         MmsClientConfiguration conf = MmsClientConfiguration.create(new MmsiId(MMSI))
-                        .setHost(MMS_HOST)
-                        .setPositionReader(new PositionReader() {
-                            @Override
-                            public PositionTime getCurrentPosition() {
-                                return PositionTime.create(55, 11, System.currentTimeMillis());
-                            }
-                        });
+                .setHost(MMS_HOST)
+                .setPositionReader(new PositionReader() {
+                    @Override
+                    public PositionTime getCurrentPosition() {
+                        return PositionTime.create(55, 11, System.currentTimeMillis());
+                    }
+                });
         mmsClientService.start(conf);
 
     }

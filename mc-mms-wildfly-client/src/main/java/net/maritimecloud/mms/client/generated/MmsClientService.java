@@ -19,8 +19,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * To be Auto-generated.
- * MMS service interface.
- * Requires that the application code has a @Producer for the MmsClientConfiguration
+ * <p/>
+ * Main MMS interface.
+ * The underlying MMS service must be started using the {@code start(MmsClientConfiguration conf)} method.
  */
 @Singleton
 @Startup
@@ -45,11 +46,6 @@ public class MmsClientService {
         }
     }
 
-    /** Returns the MMS client */
-    public MmsClient getMmsClient() {
-        return mmsClient;
-    }
-
     /**
      * Starts the MMS connection using the given configuration
      * @param conf the configuration
@@ -68,7 +64,8 @@ public class MmsClientService {
     }
 
     /**
-     * Stops the MMS connection
+     * Stops the MMS connection.
+     * Also called automatically when the application terminates.
      */
     @PreDestroy
     @Lock(LockType.WRITE)
@@ -84,9 +81,14 @@ public class MmsClientService {
         }
     }
 
+    /** Returns the MMS client. May be null, if the service has not been started yet */
+    public MmsClient getMmsClient() {
+        return mmsClient;
+    }
+
     /**
-     * Returns if the MMS connections has been started
-     * @return if the MMS connections has been started
+     * Returns if the MMS service has been started
+     * @return if the MMS service has been started
      */
     public boolean isStarted() {
         return mmsClient != null;
@@ -94,7 +96,7 @@ public class MmsClientService {
 
     /** Utitlity method - Looks up the managed bean with the given class */
     @SuppressWarnings("unchecked")
-    public static <T> T getBean(Class<T> clazz) {
+    public static <T extends EndpointImplementation> T getMmsServiceBean(Class<T> clazz) {
         BeanManager beanManager = CDI.current().getBeanManager();
         Bean<T> bean = (Bean<T>) beanManager.resolve(beanManager.getBeans(clazz));
         CreationalContext<T> cc = beanManager.createCreationalContext(bean);
