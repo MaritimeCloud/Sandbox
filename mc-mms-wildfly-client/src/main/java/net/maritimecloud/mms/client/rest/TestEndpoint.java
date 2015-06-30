@@ -1,13 +1,12 @@
 package net.maritimecloud.mms.client.rest;
 
-import net.maritimecloud.mms.client.model.ChatMessage;
 import net.maritimecloud.mms.client.MmsTextingService;
+import net.maritimecloud.mms.client.model.ChatMessage;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,7 +19,7 @@ import javax.ws.rs.QueryParam;
 @Path("/chat")
 public class TestEndpoint {
 
-    @PersistenceContext
+    @Inject
     private EntityManager em;
 
     @Inject

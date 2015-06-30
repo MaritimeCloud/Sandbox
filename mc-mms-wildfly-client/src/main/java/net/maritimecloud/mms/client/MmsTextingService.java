@@ -38,14 +38,8 @@ public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void sendMessage(MessageHeader header, MaritimeText msg) {
-        // Introduce some errors into the system
-        if (Math.random() < errorRate) {
-            sessionContext.setRollbackOnly();
-            throw new RuntimeException("An error occurred");
-        }
-
         System.out.println("*** Message Received [" + header.getSender() + "]: " + msg.getMsg());
-        persist(msg);
+        persistMessage(msg);
     }
 
     /** Broadcast the message to all registered chat services */
@@ -58,13 +52,7 @@ public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
         MaritimeText txt = new MaritimeText();
         txt.setMsg(msg);
         txt.setSeverity(MaritimeTextingNotificationSeverity.MESSAGE);
-        persist(txt);
-
-        // Introduce some errors into the system
-        if (Math.random() < errorRate) {
-            sessionContext.setRollbackOnly();
-            throw new Exception("An error occurred");
-        }
+        persistMessage(txt);
 
         AtomicInteger cnt = new AtomicInteger(0);
         try {
@@ -90,9 +78,16 @@ public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
     }
 
     /** Persist the message */
-    private void persist(MaritimeText msg) {
+    private void persistMessage(MaritimeText msg) {
         ChatMessage m = new ChatMessage(msg.getSeverity().toString(), msg.getMsg());
         em.persist(m);
+
+        // Introduce some errors into the system
+        if (Math.random() < errorRate) {
+            sessionContext.setRollbackOnly();
+            throw new RuntimeException("An error occurred");
+        }
+
         System.out.println("DB contains " +
                 em.createNamedQuery("ChatMessage.selectAll").getResultList().size()
                 + " chat messages");
