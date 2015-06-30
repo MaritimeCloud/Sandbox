@@ -13,8 +13,8 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.QueryParam;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Singleton
 public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
 
-    @PersistenceContext
+    @Inject
     private EntityManager em;
 
     @Resource
