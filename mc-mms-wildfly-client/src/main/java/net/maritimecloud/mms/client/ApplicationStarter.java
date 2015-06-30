@@ -12,7 +12,7 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 
 /**
- * Produces the MMS configuration
+ * Starts the MMS service
  */
 @Startup
 @Singleton

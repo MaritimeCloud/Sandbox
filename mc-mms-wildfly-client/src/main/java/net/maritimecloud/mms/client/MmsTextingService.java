@@ -8,7 +8,6 @@ import net.maritimecloud.mms.client.model.ChatMessage;
 import net.maritimecloud.net.MessageHeader;
 
 import javax.annotation.Resource;
-import javax.ejb.DependsOn;
 import javax.ejb.SessionContext;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -25,7 +24,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Startup
 @Singleton
-@DependsOn("MmsClientService")
 public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
 
     @PersistenceContext
@@ -53,7 +51,7 @@ public class MmsTextingService extends AbstractMaritimeTextingServiceEJB {
     /** Broadcast the message to all registered chat services */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public int broadcastMessage(@QueryParam("msg") String msg) throws Exception {
-        if (!mmsClientService.isConnected()) {
+        if (!mmsClientService.isStarted()) {
             return 0;
         }
 
