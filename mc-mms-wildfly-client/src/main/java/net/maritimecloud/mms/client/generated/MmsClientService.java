@@ -137,7 +137,7 @@ public class MmsClientService {
     @SuppressWarnings("unchecked")
     public static <T> T getBean(Class<T> clazz) {
         BeanManager beanManager = CDI.current().getBeanManager();
-        Bean<T> bean = (Bean<T>) beanManager.getBeans(clazz).iterator().next();
+        Bean<T> bean = (Bean<T>) beanManager.resolve(beanManager.getBeans(clazz));
         CreationalContext<T> cc = beanManager.createCreationalContext(bean);
         return (T)beanManager.getReference(bean, clazz, cc);
     }
