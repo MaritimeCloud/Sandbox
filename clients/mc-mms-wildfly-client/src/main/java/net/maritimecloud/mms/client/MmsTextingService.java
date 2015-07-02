@@ -1,9 +1,9 @@
 package net.maritimecloud.mms.client;
 
+import dma.messaging.AbstractMaritimeTextingServiceBean;
 import dma.messaging.MaritimeText;
 import dma.messaging.MaritimeTextingNotificationSeverity;
 import dma.messaging.MaritimeTextingService;
-import net.maritimecloud.mms.client.generated.AbstractMaritimeTextingServiceBean;
 import net.maritimecloud.mms.client.model.ChatMessage;
 import net.maritimecloud.net.MessageHeader;
 
@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * MMS service interface.
  * <p/>
- * An actual implementation of the hypothetically auto-generated {@code AbstractMaritimeTextingServiceBean} service.
+ * An actual implementation of the auto-generated {@code AbstractMaritimeTextingServiceBean} service.
  * <p/>
  * Throws in some transaction handling, error conditions, and CDI injection to test that the service
  * works in a JEE context.

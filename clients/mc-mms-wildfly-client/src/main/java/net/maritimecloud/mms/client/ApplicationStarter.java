@@ -1,7 +1,7 @@
 package net.maritimecloud.mms.client;
 
 import net.maritimecloud.core.id.MmsiId;
-import net.maritimecloud.mms.client.generated.MmsClientService;
+import net.maritimecloud.mms.jee.MmsClientService;
 import net.maritimecloud.net.mms.MmsClientConfiguration;
 import net.maritimecloud.util.geometry.PositionReader;
 import net.maritimecloud.util.geometry.PositionTime;

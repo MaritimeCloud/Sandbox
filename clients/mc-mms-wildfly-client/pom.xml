@@ -170,6 +170,9 @@
                         </goals>
                     </execution>
                 </executions>
+		<configuration>
+                    <generateEJB>true</generateEJB>
+		</configuration>
             </plugin>
 
             <!-- Add the generated sources to the classpath -->
