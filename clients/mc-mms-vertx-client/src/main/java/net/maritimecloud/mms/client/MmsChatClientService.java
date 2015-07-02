@@ -79,16 +79,9 @@ public class MmsChatClientService implements ChatClientService<MmsClient> {
         if (hasClient(msg.getSenderId())) {
             MmsClient sender = mmsClients.get(msg.getSenderId());
             MaritimeId targetId = new MmsiId(Integer.valueOf(msg.getReceiverId()));
-            // NB: Not very effective. Need to cache endpoints
-            sender.endpointLocate(MaritimeTextingService.class)
-                    .findAll()
-                    .join()
-                    .stream()
-                    .filter(c -> c.getRemoteId().equals(targetId))
-                    .forEach(t -> {
-                        t.sendMessage(msg.toMms());
-                        LOG.info("Sent message: " + msg);
-                    }); // Ignore ack.
+            sender.endpointCreate(targetId, MaritimeTextingService.class)
+                .sendMessage(msg.toMms());
+            LOG.info("Sent message: " + msg);
         }
     }
 
