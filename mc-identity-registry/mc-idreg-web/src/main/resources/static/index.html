@@ -1,0 +1,73 @@
+<html ng-app="app">
+<head>
+    <title>Test OpenID Connect application</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+</head>
+<body style="padding: 20px;">
+
+    <div ng-controller="OidcCtrl" ng-init="init()" class="container">
+
+        <div class="row">
+            <h1>OpenID Connect Test</h1>
+        </div>
+
+        <div ng-if="user">
+
+            <div class="row">
+                <div class="panel panel-default  col-lg-4 col-md-6 col-sm-12">
+                    <div class="panel-heading">Authenticated User</div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+                            <dt>name</dt>
+                            <dd>{{user.name}}</dd>
+
+                            <dt>user name</dt>
+                            <dd>{{user.userName}}</dd>
+
+                            <dt>e-mail</dt>
+                            <dd>{{user.email}}</dd>
+
+                            <dt>Realm Roles</dt>
+                            <dd>
+                                <span style="margin-top: 5px" class="label label-primary" ng-repeat="r in user.realmRoles">{{r}}</span>
+                            </dd>
+
+                            <dt>Resource Roles</dt>
+                            <dd>
+                                <span style="margin-top: 5px" class="label label-primary"  ng-repeat="r in user.resourceRoles">{{r}}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <a class="btn btn-danger" href="/logout" role="button">Log Out</a>
+            </div>
+
+        </div>
+
+        <div ng-if="!user" class="row">
+
+            <h3>User NOT logged in</h3>
+            <a class="btn btn-primary" href="/oidc-login" role="button">Log In</a>
+
+        </div>
+
+        <div class="row" style="padding-top: 20px" ng-if="error">
+            <div class="alert alert-danger alert-dismissible col-lg-4 col-md-6 col-sm-12" role="alert">
+                <stron>Error</stron>
+                {{error}}
+            </div>
+        </div>
+
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
