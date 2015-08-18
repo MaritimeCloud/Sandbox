@@ -8,6 +8,10 @@ This sandbox project contains two sub-projects:
 
 ## Prerequisites for testing
 
+By default, the application will use the test Keycloak server running at https://maritimeid.maritimecloud.net
+
+Alternatively, if you want to test against a local Keycloak server, follow these steps:
+
 Download and run the latest Keycloak server on port 8090, e.g.:
 
     ./keycloak/bin/standalone.sh -Djboss.socket.binding.port-offset=10

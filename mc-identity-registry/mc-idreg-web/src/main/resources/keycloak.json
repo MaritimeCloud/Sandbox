@@ -1,11 +1,10 @@
 {
-  "realm": "demo",
-  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhiTqW67ET1rLUEo6R2wOolzUMuJTSwzDJPSqmyDYcFavDKcc36mmyLNxhfRT2i/TOTU7y2Ojlj7Gl8D1tUTtKn677NBp2+fhVkpw+Dq71ID81+Hs/ey6KILbSYdD+ZNS64rzonvau+2IixKczCtDK7Mq5pXREa9tHZ5JdxnVdhEeLWIMGDlTuSThp4qdPpNQk0c2+fCOgKXihYlMfecmOTwAnzlnx5FIt8St0hRx1wrYOrNNOujwhqL/ivVaSzmj+65b+Lnb+fXtFyn+SSfg1aShrxvbDSqwblG6VOWOKsvi2qYTPcAT9LAFb55lPwH9mTWnRwIna8UXykoPr10o0QIDAQAB",
-  "auth-server-url": "http://localhost:8090/auth",
+  "realm": "test",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluGBdZrh64I/vXizyyt5+Rjl2vFXJY7oTkwppJldqPy2XiWAX1Hmoh0l/ryIFootjUVNSCtLVvqhxofJQlk9Wt+wk/u6ozdPVgGO4U12zo7Xzo7i008mVBq9B6aeWZDcDF38WRRqJfjce6Dp2rSVG8DytS9OyumMRw3kDCnASMe2cAgWgDWPweG/bXzJgxZ3e/OKTqY4DffuTIHlzEgqAmJTTx9qbm9wFulaKquG19RedGzJXwDsRMDa07O0B324XzYvNZ1DTPJ7L4ISykEr/Q+Rg+dp/qdGijoUrks7DsjF6u3q6QflfqXQxND04JIymuptUHQ5XStlGeCcQoqt0wIDAQAB",
+  "auth-server-url": "https://maritimeid.maritimecloud.net/auth",
   "ssl-required": "external",
-  "resource": "msinm",
+  "resource": "idreg",
   "credentials": {
-    "secret": "e8f6f46a-c0c6-47c5-b2e7-d738de328474"
-  },
-  "use-resource-role-mappings": true
+    "secret": "472c4e35-a971-45d4-87d2-58b32faac043"
+  }
 }
