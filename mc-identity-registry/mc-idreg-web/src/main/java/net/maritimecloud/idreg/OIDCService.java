@@ -52,7 +52,7 @@ public class OIDCService {
     @PostConstruct
     public void init() throws IOException {
         Reader configFile = new InputStreamReader(OIDCService.class.getResourceAsStream("/keycloak.json"));
-        oidcClient = OIDCClientFactory.newOIDCClient(configFile);
+        oidcClient = OIDCClientFactory.newOIDCClient(configFile, "mmsi");
     }
 
     /**

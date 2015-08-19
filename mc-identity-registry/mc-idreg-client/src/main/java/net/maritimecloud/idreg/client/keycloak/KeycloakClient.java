@@ -43,6 +43,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -63,13 +64,16 @@ public class KeycloakClient implements OIDCClient {
     private final static Logger log = Logger.getLogger(KeycloakClient.class.getName());
 
     private KeycloakJsonConfig config;
+    private String[] customClaims;
 
     /** {@inheritDoc} */
     @Override
-    public synchronized void init(Reader settings) {
+    public synchronized void init(Reader settings, String... customClaims) {
         Objects.requireNonNull(
                 settings,
                 "The Keycloak client must be initialized with a valid keycloak.json file");
+
+        this.customClaims = customClaims;
 
         config = null;
         try {
@@ -236,6 +240,13 @@ public class KeycloakClient implements OIDCClient {
                 addRoles(data.getRealmRoles(), claims.get("realm_access"));
                 if (claims.get("resource_access") != null) {
                     addRoles(data.getResourceRoles(), ((Map)claims.get("resource_access")).get(config.getClientId()));
+                }
+
+                // Read out custom claims
+                if (customClaims != null) {
+                    Arrays.stream(customClaims)
+                            .filter(claims::containsKey)
+                            .forEach(c -> data.getCustomClaims().put(c, claims.get(c)));
                 }
 
                 return data;

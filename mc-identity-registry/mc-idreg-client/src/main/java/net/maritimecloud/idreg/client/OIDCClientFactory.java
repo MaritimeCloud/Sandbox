@@ -30,11 +30,12 @@ public class OIDCClientFactory {
      * Creates and instantiates a new OpenID Connect client
      *
      * @param settings provider specific settings used to initialize the client
+     * @param customClaims custom claims to extract from the access token
      * @return the new initialized OpenID Connect client
      */
-    public static OIDCClient newOIDCClient(Reader settings) {
+    public static OIDCClient newOIDCClient(Reader settings, String... customClaims) {
         OIDCClient client = oidcLientLoader.iterator().next();
-        client.init(settings);
+        client.init(settings, customClaims);
         return client;
     }
 }

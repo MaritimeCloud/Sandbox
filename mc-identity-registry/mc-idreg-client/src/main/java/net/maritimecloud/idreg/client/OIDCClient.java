@@ -38,8 +38,9 @@ public interface OIDCClient {
      * in a provider specific format
      *
      * @param settings the settings
+     * @param customClaims custom claims to extract from the access token
      */
-    default void init(Reader settings) {}
+    default void init(Reader settings, String... customClaims) {}
 
 
     /**

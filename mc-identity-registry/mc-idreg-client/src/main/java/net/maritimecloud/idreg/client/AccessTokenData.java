@@ -15,7 +15,9 @@
  */
 package net.maritimecloud.idreg.client;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -31,6 +33,7 @@ public class AccessTokenData {
     String familyName;
     Set<String> realmRoles = new HashSet<>();
     Set<String> resourceRoles = new HashSet<>();
+    Map<String, Object> customClaims = new HashMap<>();
 
     /**
      * Constructor
@@ -38,7 +41,9 @@ public class AccessTokenData {
     public AccessTokenData() {
     }
 
-    /** Returns a string representation of the access token */
+    /**
+     * Returns a string representation of the access token
+     */
     @Override
     public String toString() {
         return "AccessTokenData{" +
@@ -49,6 +54,7 @@ public class AccessTokenData {
                 ", familyName='" + familyName + '\'' +
                 ", realmRoles=" + realmRoles +
                 ", resourceRoles=" + resourceRoles +
+                ", customClaims=" + customClaims +
                 '}';
     }
 
@@ -112,5 +118,13 @@ public class AccessTokenData {
 
     public void setResourceRoles(Set<String> resourceRoles) {
         this.resourceRoles = resourceRoles;
+    }
+
+    public Map<String, Object> getCustomClaims() {
+        return customClaims;
+    }
+
+    public void setCustomClaims(Map<String, Object> customClaims) {
+        this.customClaims = customClaims;
     }
 }

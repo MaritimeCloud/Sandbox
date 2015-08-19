@@ -38,6 +38,11 @@
                             <dd>
                                 <span style="margin-top: 5px" class="label label-primary"  ng-repeat="r in user.resourceRoles">{{r}}</span>
                             </dd>
+
+                            <dt>Custom Claims</dt>
+                            <dd>
+                                <div ng-repeat="(k,v) in user.customClaims">{{k}} = {{v}}</div>
+                            </dd>
                         </dl>
                     </div>
                 </div>
