@@ -73,6 +73,13 @@ public interface OIDCClient {
 
 
     /**
+     * Redirects to the OpenID Connect edit-account URL
+     *
+     * @param response the HTTP servlet response
+     */
+    void redirectToAuthServerAccount(HttpServletResponse response) throws IOException;
+
+    /**
      * Constructs an OpenID Connect client
      */
     abstract class Builder {

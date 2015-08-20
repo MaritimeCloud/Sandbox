@@ -163,4 +163,16 @@ public class OIDCService {
         oidcClient.redirectToAuthServerLogout(response, callbackUrl);
     }
 
+    /**
+     * Redirects to the edit-account page for the current user
+     *
+     * @param response the servlet response
+     * @throws IOException
+     */
+    @RequestMapping(value = "/account")
+    public void editAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        OIDCUtils.nocache(response);
+        oidcClient.redirectToAuthServerAccount(response);
+    }
+
 }
