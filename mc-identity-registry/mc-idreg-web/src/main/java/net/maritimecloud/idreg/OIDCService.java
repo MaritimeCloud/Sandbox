@@ -133,8 +133,6 @@ public class OIDCService {
     /**
      * Invalidates the user http session.
      *
-     * TODO: Send logout to auth server
-     *
      * @param response the servlet response
      * @throws IOException
      */
@@ -145,4 +143,24 @@ public class OIDCService {
         }
         response.sendRedirect("/");
     }
+
+
+    /**
+     * Logs the user out and redirects to the auth server to log out the session there
+     *
+     * @param request the servlet request
+     * @param response the servlet response
+     * @throws IOException
+     */
+    @RequestMapping(value = "/logout-auth-server")
+    public void logoutAuthServer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (request.getSession() != null) {
+            request.getSession().invalidate();
+        }
+
+        OIDCUtils.nocache(response);
+        String callbackUrl = OIDCUtils.getUrl(request);
+        oidcClient.redirectToAuthServerLogout(response, callbackUrl);
+    }
+
 }

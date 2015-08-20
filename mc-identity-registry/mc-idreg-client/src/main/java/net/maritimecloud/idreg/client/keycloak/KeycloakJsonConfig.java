@@ -61,6 +61,9 @@ public class KeycloakJsonConfig {
     private static final String KEYCLOAK_TOKEN_TEMPLATE
             = "%s/realms/%s/protocol/openid-connect/token";
 
+    private static final String KEYCLOAK_AUTH_LOGOUT_TEMPLATE
+            = "%s/realms/%s/protocol/openid-connect/logout?redirect_uri=%s";
+
     private final static Logger log = Logger.getLogger(KeycloakJsonConfig.class.getName());
 
     private JsonObject keycloakJson;
@@ -153,7 +156,6 @@ public class KeycloakJsonConfig {
                 KEYCLOAK_TOKEN_TEMPLATE,
                 keycloakJson.getString("auth-server-url"),
                 encode(keycloakJson.getString("realm")));
-
     }
 
     /**
@@ -173,4 +175,19 @@ public class KeycloakJsonConfig {
                 .generatePublic(new X509EncodedKeySpec(der));
     }
 
+
+    /**
+     * Constructs an logout URL for the Keycloak server
+     *
+     * @param callbackUrl the callback URL
+     * @return the logout URL to re-direct to
+     */
+    public String getLougoutRequest(String callbackUrl) {
+        // Create the URL for the logout request
+        return String.format(
+                KEYCLOAK_AUTH_LOGOUT_TEMPLATE,
+                keycloakJson.getString("auth-server-url"),
+                encode(keycloakJson.getString("realm")),
+                encode(callbackUrl));
+    }
 }

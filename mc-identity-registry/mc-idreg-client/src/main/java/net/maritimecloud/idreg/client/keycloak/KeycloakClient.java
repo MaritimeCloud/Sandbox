@@ -77,6 +77,16 @@ public class KeycloakClient implements OIDCClient {
 
 
     /** {@inheritDoc} */
+    @Override
+    public void redirectToAuthServerLogout(HttpServletResponse response, String callbackUrl) throws IOException {
+        // Redirect to the logout request
+        String url = config.getLougoutRequest(callbackUrl);
+        log.log(Level.FINE, "Redirecting to logout request: " + url);
+        response.sendRedirect(url);
+    }
+
+
+    /** {@inheritDoc} */
     public void redirectToAuthServer(HttpServletResponse response, String callbackUrl) throws IOException {
 
         // Create a state code used for Cross-Site Request Forgery (CSRF, XSRF) prevention

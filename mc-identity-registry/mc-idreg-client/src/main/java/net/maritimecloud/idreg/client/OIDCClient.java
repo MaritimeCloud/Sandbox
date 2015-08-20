@@ -64,6 +64,15 @@ public interface OIDCClient {
     AccessTokenData handleAuthServerCallback(HttpServletRequest request, String callbackUrl) throws AuthErrorException;
 
     /**
+     * Redirects to the OpenID Connect logout URL
+     *
+     * @param response the HTTP servlet response
+     * @param callbackUrl the callback url
+     */
+    void redirectToAuthServerLogout(HttpServletResponse response, String callbackUrl) throws IOException;
+
+
+    /**
      * Constructs an OpenID Connect client
      */
     abstract class Builder {
