@@ -18,12 +18,11 @@ package net.maritimecloud.idreg.client;
 import net.maritimecloud.idreg.client.keycloak.KeycloakClient;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests.
@@ -31,15 +30,16 @@ import java.io.Reader;
 public class OIDCClientTest {
 
     @Test
-    public void testOIDCCLient() throws IOException {
+    public void testOIDCCLient() throws Exception {
 
         try (Reader r =  new InputStreamReader(getClass().getResourceAsStream("/keycloak.json"))) {
-            OIDCClient client = OIDCClientFactory.newOIDCClient(r);
+            OIDCClient client = OIDCClient.newBuilder()
+                    .configuration(r)
+                    .build();
 
             assertNotNull(client);
             assertTrue(client instanceof KeycloakClient);
         }
-
     }
 
 }

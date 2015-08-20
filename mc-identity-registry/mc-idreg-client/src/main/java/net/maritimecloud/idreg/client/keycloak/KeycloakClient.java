@@ -39,7 +39,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -66,34 +65,19 @@ public class KeycloakClient implements OIDCClient {
     private KeycloakJsonConfig config;
     private String[] customClaims;
 
-    /** {@inheritDoc} */
-    @Override
-    public synchronized void init(Reader settings, String... customClaims) {
-        Objects.requireNonNull(
-                settings,
-                "The Keycloak client must be initialized with a valid keycloak.json file");
-
+    /**
+     * Constructor
+     * @param config the configuration
+     * @param customClaims optionally, a list of custom claims
+     */
+    private KeycloakClient(KeycloakJsonConfig config, String[] customClaims) {
+        this.config = Objects.requireNonNull(config);
         this.customClaims = customClaims;
-
-        config = null;
-        try {
-            config = KeycloakJsonConfig.load(settings);
-            log.info("Initialized Keycloak client");
-        } catch (Exception e) {
-            log.log(Level.SEVERE, "Error initialized Keycloak client. Service not enabled.");
-        }
     }
 
-    /** Check that the client has been properly initialized */
-    private void checkInitialized() throws IOException {
-        if (config == null) {
-            throw new IOException("Keycloak client must be initialized with a valid keycloak.json file");
-        }
-    }
 
     /** {@inheritDoc} */
     public void redirectToAuthServer(HttpServletResponse response, String callbackUrl) throws IOException {
-        checkInitialized();
 
         // Create a state code used for Cross-Site Request Forgery (CSRF, XSRF) prevention
         String state = OIDCUtils.getStateCode();
@@ -109,6 +93,7 @@ public class KeycloakClient implements OIDCClient {
         log.log(Level.FINE, "Redirecting to auth request: " + url);
         response.sendRedirect(url);
     }
+
 
     /** {@inheritDoc} */
     public AccessTokenData handleAuthServerCallback(HttpServletRequest request, String callbackUrl) throws AuthErrorException {
@@ -136,6 +121,7 @@ public class KeycloakClient implements OIDCClient {
         }
 
     }
+
 
     /**
      * Execute the auth server token request
@@ -185,6 +171,7 @@ public class KeycloakClient implements OIDCClient {
         // Parse the resulting JSON token
         return parseAndValidateTokenResponse(result);
     }
+
 
     /**
      * Parses the JSON token received from the auth server upon issuing a token request.
@@ -261,6 +248,7 @@ public class KeycloakClient implements OIDCClient {
         }
     }
 
+
     /**
      * Validate the the 'state' request parameter matches the state cookie.
      * Throws an exception if the state values are invalid or differ.
@@ -271,6 +259,7 @@ public class KeycloakClient implements OIDCClient {
             throw new AuthErrorException("Invalid 'state' value");
         }
     }
+
 
     /** Add roles from the roleMap to the roles list */
     @SuppressWarnings("unchecked")
@@ -283,9 +272,43 @@ public class KeycloakClient implements OIDCClient {
         }
     }
 
+
     /** Null-safe version of returning the toString() of an object */
     private static String toString(Object obj) {
         return obj == null ? null : obj.toString();
+    }
+
+
+    /**
+     * Used for building the Keycloak client
+     */
+    @SuppressWarnings("unused")
+    public static class KeycloakClientBuilder extends OIDCClient.Builder {
+
+        /** {@inheritDoc} */
+        @Override
+        public OIDCClient build() throws Exception {
+
+            // Properties are currently not supported
+            if (properties != null) {
+                throw new IllegalArgumentException("You must instantiate a Keycloak client from a keycloak.json Reader");
+            }
+
+            // You can only instantiate the Keycloak client using a keycloak.json Reader
+            Objects.requireNonNull(configuration, "You must instantiate a Keycloak client from a keycloak.json Reader");
+
+            try {
+                KeycloakJsonConfig config = KeycloakJsonConfig.load(configuration);
+                KeycloakClient client = new KeycloakClient(config, customClaims);
+                log.info("Initialized Keycloak client");
+
+                return client;
+            } catch (Exception e) {
+                log.log(Level.SEVERE, "Error initialized Keycloak client. Service not enabled.");
+                throw e;
+            }
+        }
+
     }
 
 }

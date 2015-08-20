@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Properties;
+import java.util.ServiceLoader;
 
 /**
  * The OpenID Connect client has functionality for performing an authentication request, as described in
@@ -33,15 +35,16 @@ import java.io.Reader;
  */
 public interface OIDCClient {
 
-    /**
-     * Initializes - or re-initializes - the client with settings
-     * in a provider specific format
-     *
-     * @param settings the settings
-     * @param customClaims custom claims to extract from the access token
-     */
-    default void init(Reader settings, String... customClaims) {}
+    ServiceLoader<Builder> builderLoader = ServiceLoader.load(Builder.class);
 
+    /**
+     * Creates a new OpenID Connect builder
+     *
+     * @return the new initialized OpenID Connect client
+     */
+    static Builder newBuilder() {
+        return builderLoader.iterator().next();
+    }
 
     /**
      * Redirects to the OpenID Connect auth server
@@ -59,4 +62,53 @@ public interface OIDCClient {
      * @param callbackUrl the callback url
      */
     AccessTokenData handleAuthServerCallback(HttpServletRequest request, String callbackUrl) throws AuthErrorException;
+
+    /**
+     * Constructs an OpenID Connect client
+     */
+    abstract class Builder {
+
+        protected Properties properties;
+        protected Reader configuration;
+        protected String customClaims[];
+
+        /**
+         * Sets the OpenID Connect client configuration based on a Reader
+         *
+         * @param configuration the configuration
+         * @return the builder
+         */
+        public Builder configuration(Reader configuration) {
+            this.configuration = configuration;
+            return this;
+        }
+
+        /**
+         * Sets the OpenID Connect client configuration based on properties
+         *
+         * @param properties the properties
+         * @return the builder
+         */
+        public Builder configuration(Properties properties) {
+            this.properties = properties;
+            return this;
+        }
+
+        /**
+         * Sets the custom claims to extract from the access token
+         *
+         * @param customClaims the custom claims to extract from the access token
+         * @return the builder
+         */
+        public Builder customClaims(String... customClaims) {
+            this.customClaims = customClaims;
+            return this;
+        }
+
+        /**
+         * Builds the OpenID Connect client
+         * @return the instantiated OpenID Connect client
+         */
+        public abstract OIDCClient build() throws Exception;
+    }
 }

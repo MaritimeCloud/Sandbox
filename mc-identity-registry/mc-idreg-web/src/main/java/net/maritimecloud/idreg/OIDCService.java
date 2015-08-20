@@ -18,10 +18,8 @@ package net.maritimecloud.idreg;
 import net.maritimecloud.idreg.client.AccessTokenData;
 import net.maritimecloud.idreg.client.AuthErrorException;
 import net.maritimecloud.idreg.client.OIDCClient;
-import net.maritimecloud.idreg.client.OIDCClientFactory;
 import net.maritimecloud.idreg.client.OIDCUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,9 +48,12 @@ public class OIDCService {
      * Called when the service is initialized
      */
     @PostConstruct
-    public void init() throws IOException {
+    public void init() throws Exception {
         Reader configFile = new InputStreamReader(OIDCService.class.getResourceAsStream("/keycloak.json"));
-        oidcClient = OIDCClientFactory.newOIDCClient(configFile, "mmsi");
+        oidcClient = OIDCClient.newBuilder()
+            .configuration(configFile)
+            .customClaims("mmsi")
+            .build();
     }
 
     /**
