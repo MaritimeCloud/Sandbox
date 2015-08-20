@@ -1,0 +1,10 @@
+{
+  "realm": "test",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluGBdZrh64I/vXizyyt5+Rjl2vFXJY7oTkwppJldqPy2XiWAX1Hmoh0l/ryIFootjUVNSCtLVvqhxofJQlk9Wt+wk/u6ozdPVgGO4U12zo7Xzo7i008mVBq9B6aeWZDcDF38WRRqJfjce6Dp2rSVG8DytS9OyumMRw3kDCnASMe2cAgWgDWPweG/bXzJgxZ3e/OKTqY4DffuTIHlzEgqAmJTTx9qbm9wFulaKquG19RedGzJXwDsRMDa07O0B324XzYvNZ1DTPJ7L4ISykEr/Q+Rg+dp/qdGijoUrks7DsjF6u3q6QflfqXQxND04JIymuptUHQ5XStlGeCcQoqt0wIDAQAB",
+  "auth-server-url": "https://maritimeid.maritimecloud.net/auth",
+  "ssl-required": "external",
+  "resource": "idreg",
+  "credentials": {
+    "secret": "472c4e35-a971-45d4-87d2-58b32faac043"
+  }
+}
