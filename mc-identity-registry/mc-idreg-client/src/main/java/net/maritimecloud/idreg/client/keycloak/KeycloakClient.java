@@ -78,20 +78,14 @@ public class KeycloakClient implements OIDCClient {
 
     /** {@inheritDoc} */
     @Override
-    public void redirectToAuthServerLogout(HttpServletResponse response, String callbackUrl) throws IOException {
-        // Redirect to the logout request
-        String url = config.getLougoutRequest(callbackUrl);
-        log.log(Level.FINE, "Redirecting to logout request: " + url);
-        response.sendRedirect(url);
+    public String getAuthServerLogoutRequest(String callbackUrl) {
+        return  config.getLougoutRequest(callbackUrl);
     }
 
-    /** {@inheritDoc} */
+
     @Override
-    public void redirectToAuthServerAccount(HttpServletResponse response) throws IOException {
-        // Redirect to the logout request
-        String url = config.getAccountRequest();
-        log.log(Level.FINE, "Redirecting to account request: " + url);
-        response.sendRedirect(url);
+    public String getAuthServerAccountRequest() {
+        return config.getAccountRequest();
     }
 
 

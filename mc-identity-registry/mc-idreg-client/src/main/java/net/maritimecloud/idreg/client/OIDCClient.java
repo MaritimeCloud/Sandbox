@@ -64,20 +64,35 @@ public interface OIDCClient {
     AccessTokenData handleAuthServerCallback(HttpServletRequest request, String callbackUrl) throws AuthErrorException;
 
     /**
+     * Returns a logout URL to the authorization server
+     * @return a logout URL to the authorization server
+     */
+    String getAuthServerLogoutRequest(String callbackUrl);
+
+    /**
      * Redirects to the OpenID Connect logout URL
      *
      * @param response the HTTP servlet response
      * @param callbackUrl the callback url
      */
-    void redirectToAuthServerLogout(HttpServletResponse response, String callbackUrl) throws IOException;
+    default void redirectToAuthServerLogout(HttpServletResponse response, String callbackUrl) throws IOException {
+        response.sendRedirect(getAuthServerLogoutRequest(callbackUrl));
+    }
 
+    /**
+     * Returns an edit-account URL to the authorization server
+     * @return an edit-account URL to the authorization server
+     */
+    String getAuthServerAccountRequest();
 
     /**
      * Redirects to the OpenID Connect edit-account URL
      *
      * @param response the HTTP servlet response
      */
-    void redirectToAuthServerAccount(HttpServletResponse response) throws IOException;
+    default void redirectToAuthServerAccount(HttpServletResponse response) throws IOException {
+        response.sendRedirect(getAuthServerAccountRequest());
+    }
 
     /**
      * Constructs an OpenID Connect client
