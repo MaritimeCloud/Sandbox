@@ -18,7 +18,8 @@ Download and run the latest Keycloak server on port 8090, e.g.:
     
 Create and configure a realm and a client application in Keycloak.
 
-Copy the content of the client application keycloak.json file to mc-idreg-web/src/main/resources/keycloak.json
+Copy the content of the client application keycloak.json to a local file, and start Application.main() with 
+the VM argument: -Dkeycloak.json=/path/to/keycloak.json
 
 ## Testing
 

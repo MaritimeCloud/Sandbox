@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.logging.Level;
@@ -49,11 +52,20 @@ public class OIDCService {
      */
     @PostConstruct
     public void init() throws Exception {
-        Reader configFile = new InputStreamReader(OIDCService.class.getResourceAsStream("/keycloak.json"));
-        oidcClient = OIDCClient.newBuilder()
-            .configuration(configFile)
+
+        String filePath = System.getProperty("keycloak.json");
+
+        // Use keycloak.json defined by system property. Otherwise, use keycloak.json in classpath
+        InputStream keycloakConfigFile = (filePath != null)
+                ? new FileInputStream(new File(filePath))
+                : OIDCService.class.getResourceAsStream("/keycloak.json");
+
+        try (Reader configFile = new InputStreamReader(keycloakConfigFile)) {
+            oidcClient = OIDCClient.newBuilder()
+                    .configuration(configFile)
             .customClaims("mmsi")
             .build();
+        }
     }
 
     /**

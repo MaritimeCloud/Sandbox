@@ -83,6 +83,7 @@ public class KeycloakClient implements OIDCClient {
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public String getAuthServerAccountRequest() {
         return config.getAccountRequest();
