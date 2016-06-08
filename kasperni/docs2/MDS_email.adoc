@@ -1,0 +1,7 @@
+Jeg er begyndt at kigge lidt udover arbejdspakke 3 i Effiencesea 2
+Har taenkt en del over f.eks. FAL rapportering i . Og jeg tror simpelthen ikke vi kan komme uden om en central database med informationer som FAL rapporter kan traekkes fra.
+Denne database tror jeg ogsaa vil kunne bruges til at realisere visionen omking ShipBook. Og deling af information.
+Men hvor alt diskussion omkring format, hvem maa aendre data, o.s.v. er lagt ud til organizationer er lagt. Mens vi bare
+laver selve infrastrukturen.
+Den er selvfoellige lidt kontrovasiel fordi vi ikke officiel er en storage cloud.
+Jeg vil gerne komme med et indskud i debatten.

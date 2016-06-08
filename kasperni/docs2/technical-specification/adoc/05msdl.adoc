@@ -1,0 +1,135 @@
+== Serialization and the Maritime Service Definition Language (MSDL)
+Let us start this chapter with the definition of two commonly used concepts: Serialization and IDLs:
+
+In the context of data storage, *Serialization* is the process of translating data structures or object state into a format that can be stored (for example, in a file or transmitted across a network connection link) and reconstructed later in the same or another computer environment. When the resulting series of bits is reread according to the serialization format agreed upon, it can be used to create a semantically identical clone of the original object.
+
+An *interface description language* (IDL), is a specification language used to describe a software component's interface. IDLs describe an interface in a language-independent way, enabling communication between software components that do not share a language – for example, between components written in C++ and components written in Java.
+
+AIS is the first global standard for exchanging of martime messages. However, it comes with a number of problems which calls for radical solutions.
+One major problem is the actual definition of the massages exchanged.
+
+
+
+* *Limited Flexibility,* AIS only allows 64 different service types (not including application specific messages)
+* *
+However, scaling this to 1000s of different services does not work. Instead message and service definition must be registered in a central place in machine readable format to avoid any kind of ambiguity.
+
+Beskrive AIS. It might be possible to do so with 20 different message types. But if we get 100 different services each exchanging a couple of different messages. Everybody will need to spend too much time on implementing reading and writer of the messages. Instead of spending time on implementing the actual functionality.
+
+While AIS is a great starting point.
+  Like AIS messages must be compact to save bandwidth
+
+  Must be possible to define a variable number of services. For example, AIS only allows 64 different service types (not including application specific messages)
+
+  It must be possible to sign messages to validate senders of messages
+
+There are 27 different types of top level messages defined in ITU 1371-4 (out of a possibility of 64)
+
+With a targeted user group of everything from multinational companies to weekend leisure sailers.
+
+
+Instead the lingua franca on the Maritime Cloud is the Maritime Service Definition Language (MSDL). Which is a machine readable format
+for specifying services and the 
+
+
+The syntax of MSDL is inspired by Thrift, a remote procedure call (RPC) framework developed at Facebook.
+While the main binary serialization format is inspired by the binary wire format used by Protocol Buffers, developed at Google.
+Google uses Protocol Buffers for almost all of its internal RPC protocols and file formats.
+
+
+The Maritime Cloud is a . It is important that they all can communicate.
+
+One of the biggest challenges is making sure all these device talk the same 'language'. So a service that is running 
+
+A number of issues exists.
+Every vendor needs to 
+
+AIS cannot be extended
+
+All messages are equal. There is no concept similar to application specific messages. As all messages are defined in MSDL.
+Unlike AIS messages. Messages defined in MSDL can be extended at a later point. For example, 
+
+The protocol for serialization is not tightly coupled to the definition of data. At some point
+
+We envision everyone.
+
+Web Service Definition Language (WSDL) – An XML-based language that defines the 
+functional interfaces for a Web Service. A WSDL document represents the official “contract” 
+between service providers and their consumers. These WSDL interfaces are described first in 
+abstract message structures, and the bound to a concrete transport protocol and a communication 
+“endpoint”. 
+
+XML Schema – defines and describes a class of XML documents by using these constructs to 
+constrain and document the meaning, usage and relationships of their constituent parts: 
+datatypes, elements and their content, attributes and their values, entities and their contents and 
+notations 
+
+
+=== Messages and Endpoints
+MSDL works with two core concepts:
+
+* *A Message, * which is a collection of named fields with a specific type. Similar to how a table is defined in a database or a class
+* *An Endpoint, * which is collection of methods that can be invoked from a remote host. Similar to how a Web Service is defined.
+
+
+=== Serialization of messages
+Unlike, for example AIS. The serialization format for messages is not tightly couple to definition of the message.
+Instead general serialization protocols can be implemented that takes any kind of message. Serializes the message to a byte stream.
+And in the other end takes the stream of bytes and transforms them into an equivalent message.
+There are two default protocols that must come with any implementation:
+
+* *JSON,* A textual based protocol.
+* *Bin,* A very compact binary protocol.
+
+The exact 
+
+
+Why XML isn't ready to swim
+
+===
+The concept of 
+
+
+However, XML is never going to get efficient from a bandwidth perspective even when compressed.
+
+For another reason for why we do not recommend using XML and WebServices see (MMS)
+
+Maritime verden er forskellige fra flyverden
+ 
+The maritime world has a 
+Is the cost of bandwidth
+
+Usually binary format are hardwired no extensions, for example AIS.
+We avoid this in CBE by using a binary that use key-value pairs. A form of encoding populaized by Google's protobuf project. The idea is that instead.
+
+CBE is not as compact as AIS the minimum datablock is a byte not a bit. For example, Course Over Ground (COG) is normally 12 bit in any AIS message. But CBE requires that it would be 16 bit (2 bytes) to represent the value and another byte to . But this is still a huge saving over XML where the minimal representation would be something like this “<cog>50.3</cog>” which is 120 bits (15 bytes). And that is excluding use of whitespace and namespaces. For a detailed explication of the protocol see the appendix on CBE. 
+
+Open Geospatial Consortium (OGC) standards, 
+Even with compression we are wasting valuable bandwidth.
+
+– definition of the canonical form that a message must have so that it can be 
+parsed and understood similarly by the sender and the receiver 
+
+MSDL (Maritime Service Definition Language) is a software library and set of code-generation tools to expedite development and implementation of maritime services. Its primary goal is to enable efﬁcient and reliable communication across programming languages and communication carriers by abstracting the portions of each language that tend to require the most customization into a common library that is implemented in each language. Speciﬁcally, it allows developers to deﬁne datatypes and service interfaces in a single language-neutral text ﬁle and generate all the necessary code to build clients for the maritime cloud.
+
+Features
+
+* Carrier Neutral Serialization: Messages are serialized as byte streams and be transported over any carrier such as application specific messages in AIS, NAVTEX or Maritime Messageing Service (MMS).
+* Language Neutral: Services defined in MSDL files can be used from any programming language. As long as the basic Maritime Cloud library is available on the platform
+* Future-Proof: Messages can easily be extended in the future with new fields. Allowing easily evolvement of services. 
+* Simple: MSDL is a simple format for defining services, even non-technical people can develop services using the language.
+* Unambiguous: By defining all services in a single file shared among all parties. Making it available from a central hub. 
+Efficient: By knowing binary serialization because we know the format of messages/services
+
+=== Units
+
+=== Versioning
+Messages and services defined MSDL is robust in the face of versioning and data definition changes. This is critical, for example, to enable staged rollouts of changes to deployed services. The system must be able to support reading of old data from log files, as well as requests from out-of-date clients to new servers, and vice versa.
+
+
+Non-features
+  The following features are not supported (and probably never will):
+  message inheritance - Use message composition instead
+  polymorphism - As there is no inheritance, polymorphism is also not supported
+  overloading - All methods within an endpoint must be uniquely named
+  heterogeneous containers - All items in a container (set, list, map) must be of the same type

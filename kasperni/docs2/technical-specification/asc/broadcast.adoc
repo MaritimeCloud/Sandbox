@@ -1,0 +1,50 @@
+=== Broadcasts
+Unlike normal MMS supports 
+
+Since any client can send any broadcast.
+Clients must explicitly subscribe to every type of broadcast it is interested in.footnote:[At some point we might define some default broadcast that will always be relayed no matter what, for example, positional messages.]
+
+
+
+
+Since MMS is based on point to point communication. All broadcasts must be explicitly delivered by the MMS server to each client.
+
+
+
+    
+    Level 1
+    --------
+    \{asdasd}
+    
+    (Man kan vel ogsaa have nogle statiske registrering via rest, med et id?)
+    Subscribe 
+      (id, area, type*) -> no area, use default area, no id+no type -> set default area
+      
+     unsubscribe (id), no id-> unsubscribe all
+    
+    Subscrube 2 (area + type*)
+      no area-> types for default area
+      no types -> sets default area (replace for all subsscriptions)
+      
+    (any type specified will override area of previous type)   
+  
+    (Fungere som en disjunction, der er dog sendt et maximum af 1 besked)    
+    Unsubscribe (type*)
+      unsubcribe for any area, no types=all
+      (x.y.* unsubscriber ikke automatisk x.y.z, kun hvis x.y.* allerede er registreret
+  
+    TTL
+     never forward message older than (24 hours???)
+
+Subscription
+
+
+
+ 
+
+
+
+Too avoid
+
+
+  qweqweqwe

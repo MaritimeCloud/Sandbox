@@ -1,0 +1,20 @@
+
+= Maritime Cloud Specification 0.4
+
+:toc: right
+
+<<<
+
+include::01introduction.adoc[]
+
+<<<
+
+include::02overview.adoc[]
+
+<<<
+
+include::05msdl.adoc[]
+
+<<<
+
+include::06mms.adoc[]

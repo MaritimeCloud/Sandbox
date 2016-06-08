@@ -1,0 +1,123 @@
+
+
+Chapter 0: Goals/Requirements.
+  bandwidth limited.
+  Difficult to update.
+  
+
+Chapter 1: Security and identity management trends. This chapter takes a look at the state of the art xxxx
+Chapter 3: Encryption, Signing and Key distribution. This chapter signing and encryption of messages transmitted over various protocols such as xxxx and yyy.
+Chapter 4: Authorization. This chapter about  
+Chapter 5: Identity Management
+Chapter 6: Biometrics and Mobile Phones. Perhaps the biggest trend in Identity management 
+
+If you have limited techo
+Terminology 
+
+ a starting point to get the discussions started.
+
+organization names in identifiers vs numbers
+
+
+Internet of Things -> Everything must have a unique name
+
+Since this is 
+- Open source
+- Even if start. The archive will mostly become public at some point. To allow people down line
+to understand why the it evolved like it did
+
+Informal tone, part brainstorm, part.
+
+Can use as a basis for discussing about identity and security.
+
+Probably the issue that have caused the biggest headache doing the last couple of years.
+It the discussion about whether or not people have a single id with a number of roles attached.
+Or multiple ids.
+
+ I've come to the conclusion that it is best that people have separate ids.
+Just like many people have a special email for.
+We can still provide 
+Identities are attached to the.
+
+Fido Alliance, will be the API for Biometrics
+
+Lets look at some trends
+Saa god, med at Mobile devices occupy the center of identity.
+
+http://www.zdnet.com/article/the-state-of-identity-management/
+http://hitachi-id.com/password-manager/docs/defining-enterprise-identity-management.pdf
+
+
+==== Open questions
+Internationalization. 
+
+
+-----
+Eftersom release 0.3 af Maritime Cloud platformen er stort set faerdig. Og vi har en kickoff paa effiencesea 2 lige om hjoernet har jeg brugt 
+Og vejret her i Thailand kun er 30 grader har jeg brugt tiden paa proever at samle en masse tanker og ideer.
+ArkticWeb, AisStore, osv. 
+
+
+mrn:mc:id:0
+mrn:mc:id:mmsi:12312312
+mrn:mc:id:imo:2391919
+
+--Faar man automatisk assignet et id. Proever saa vidt muligt at
+returnere det samme hver gang
+ IP, StackTrace
+Hmmm
+
+
+Moede
+-> Mutual benefit
+-> We expect all work that are done in this group to be released as Open Source
+   Since this is the core
+   Not All services
+   Serioest personale problem, vi maa fortaelle 
+   As a minimum closed sourced, but free.
+   We intended do be able to deliver a complete a virtual image. Deployable by anyone.
+
+   http://stackoverflow.com/questions/2837553/saml-vs-federated-login-with-oauth
+
+   Releases will be done
+
+
+Task 3.4 Implementation
+-> Med mindre folk, Jeg kommer til at arbejde mindre med implementeringen.
+
+Dokumenter
+  Identity and Security in the Maritime Cloud
+
+  Developerment process in the maritime cloud
+   Android og IOS aarlige releases
+
+
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https.html
+security, moving away from
+
+Proven successfull in a lot of technology sectors
+
+Intel CPU, Samsung, Apple iPhone every year.
+
+Maritime Cloud Contributor Guide
+Maritime Cloud Release Planning
+Maritime Cloud Security 0.1
+
+
+1 version
+Entities
+ Physical equipment (phones, on-board, PCs, Laptops, iPad, )
+ Organization
+ Users (Leisure Suit sailors, )
+
+
+Id format
+  fixed 
+
+
+
+Host website hos amazon istedet for GitHub.
+Det bliver efterhaanden ret stort naar man udskifter det konstant
+
+
+Technical Spec,   

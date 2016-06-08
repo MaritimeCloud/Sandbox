@@ -1,0 +1,94 @@
+== Introduction
+////
+Lidt mere introduction
+
+Most of the work within the e-Navigation process have been concentrated on hardware equipment and different low level communication protocols.
+While this provides the very 
+Many technical standards have been been written over the last years concer
+However there has been little focus on how this physical equipment can be used in a open manner. In such a way
+that everybody can .....
+
+
+Our goal of designing this framework is to improve the quality and efficiency of the maritime service portfolio through creative approaches and new, innovative, and cost effective technologies.
+
+We need a logical layer (infrastructure) on top of the physical 
+
+communication links that will allow for users to exchange information
+////
+
+The Maritime Cloud is an attempt to remedy this using the following definition: 
+[source]
+----
+A communication framework enabling efficient, secure, reliable and seamless electronic information exchange between all authorized maritime stakeholders across available communication systems.
+----
+
+The Maritime Cloud is not a ‘storage cloud’ containing all information about every ship or cargo. Nor is it referring to ‘cloud computing’. The Maritime Cloud is the realization of the defined communication strategy for e-navigation as described in the strategy for e-navigation in the report of IMO MSC85 (MSC 85-26-Add.1): 
+[source]
+----
+A communication infrastructure providing authorized seamless information transfer on board ships, between ships, between ship and shore and between shore authorities and other parties with many related benefits.
+----
+
+The Maritime Cloud consists of standards, infrastructure and reference implementations, that together with governance enable the efficient exchange of information between qualified maritime parties via interoperable information services, utilizing highly automated interfaces to different communication options, enhancing general communications related to berth to berth navigation and related services for safety and security at sea and protection of the marine environment.
+
+=== A Bit of History
+The Maritime Cloud project started out as an internal project at the Danish Maritime Authority in the autumn of 2012.
+As part of the e-Navigation process the Danish Maritime Authority had been working on an e-Navigation Prototype Display system called EPD. The EPD consist of two applications for demonstrating potential e-navigation solutions. An ECDIS like ship side application and a shore side application. 
+
+During the development it was clear that AIS was a severe limiting factor when communicating between the ship side and the shore side. Putting a lot of limitations of the different kind of maritime services that could be developed. Especially three issues was identified. 
+
+* *Lack of bandwidth.* Only limited amounts of data could be transfered. Often using complex encoding as application specific AIS messages 
+* *Ease of development.* There was no easy way to simulate AIS communication just without setting up special equipment. 
+* *Limited Signal Coverage.* There are certain types of services where  where Some services For some of the services the two actors communicating might not be within reach of radio. 
+
+http://www.thecoastalpassage.com/ais.html
+
+The first prototype was built in the winter of 2012 and was implemented in the EPD in spring 2013. During the summer of 2013
+it got its name “Maritime Cloud” and the vision for a general framework for maritime communication was created. In 2014 the first releases of the Maritime Cloud was made public. And Marsec was the first external company that started using the Maritime Cloud.
+
+////
+== Guiding Principles
+Since
+Maaske droppe den og bare hav en open source header
+From the beginning all source code that have been developed 
+
+=== Reusability
+Instead of look and how systems are designed at Google, Facebook and Twitter.
+Open Source
+There is an open source implementation of this specification at https://github.com/MaritimeCloud but there is no requirements to use as an alternative implement this specification. We do not expect there to be any other full implementations of the specification. But someone might choose to create implementations of parts of the specification for various reasons.
+
+=== Ease of use
+
+=== Open Standard - a standard that is publicly available and has various rights to use associated 
+with it, and may also have various properties of how it was designed (e.g. open process). 
+http://en.wikipedia.org/wiki/Open_standard
+
+=== 3 months releases
+Agile software development is a group of software development methods in which requirements and solutions evolve through collaboration between self-organizing, cross-functional teams. It promotes adaptive planning, evolutionary development, early delivery, continuous improvement and encourages rapid and flexible response to change. It is a conceptual framework that focuses on delivering working software with the minimum amount of work.
+////
+
+=== Organization of the Specification 
+Chapter 2 gives an overview of the Maritime Cloud architecture.
+
+Chapter 3 describes the identity registry and the different actors and users of the Maritime Cloud.
+
+Chapter 4 describes the service registry and how services can be registed, found and invoked.
+
+Chapter 5 specifies the Maritime Service Definition Language. Which is language for defining services registered in the maritime cloud.
+
+Chapter 6 describes the Maritime Messaging Service (MMS).
+
+Chapter 7 gives an overview of the security of Maritime Cloud. Concluding on things described in previous chapters.
+
+
+Appendix A contains common terminology used throughout this specification.
+
+Appendix B describes the default JSON serialization protocol.
+
+Appendix C describes the default binary serialization protocol.
+
+Appendix D describes the Maritime Messaging Service protocol in details.
+
+Appendix E contains the grammar for the Maritime Service Definition Language.
+
+=== Feedback
+Readers may send feedback about errors, omissions, and ambiguities in The Maritime Cloud Specification to kasperni@gmail.com (replace with mcs-comments@maritimecloud.net when we get email at maritimecloud.net up and running)

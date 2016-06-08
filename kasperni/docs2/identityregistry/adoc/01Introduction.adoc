@@ -1,0 +1,89 @@
+== Security and Identity Management in the Maritime Cloud.
+This is a rather informal attempt to get the discussion started about security and identity management in the Maritime Cloud. I do not expect this document to be part of any official delivery. But merely serve as a sort of brainstorm of different ideas. As well as explain some of the thoughts and discussions that we have had internally at DMA doing the last couple of years. Some of the sections are merely keywords that will be expanded upon later.
+
+
+=== A Bit of History and a Little Overview
+The Maritime Cloud project started out as an internal project at the Danish Maritime Authority in the autumn of 2012.
+As part of the e-Navigation process the Danish Maritime Authority had been working on an e-Navigation Prototype Display system called EPD. The EPD consist of two applications for demonstrating potential e-navigation solutions. An ECDIS like ship side application and a shore side application. 
+
+During the development it was clear that AIS was a severe limiting factor when communicating between the ship side and the shore side. Putting a lot of limitations of the different kind of maritime services that could be developed. Especially three issues was identified. 
+
+* *Lack of bandwidth.* Only limited amounts of data could be transfered. Often using complex encoding schemes such as application specific AIS messages. 
+* *Ease of development.* There was no easy way to simulate AIS communication without a very complex developer environment.
+* *Limited Signal Coverage.* There are certain types of services where the actors communicating might not all be within reach of radio signals. 
+
+The first prototype of the maritime cloud was built in the winter of 2012 and was integrated in the EPD in spring 2013. It just featured basic point to point communication. This is basically what is known as the Maritime Message Service now. During the summer of 2013 the vision for a general framework for maritime communication was created. Including registries for services and identities in addition to the message based framework. It also got its name the “Maritime Cloud” as a sort of umbralle name for the various underlying services. In 2014 the first release of the Maritime Cloud Platform was made available for the public. The latest release (0.3) was on May 2015.
+
+Currently the Maritime Cloud is made up of 3 different core services:
+
+image::{imagesdir}/maritimecloud.png[Overview]
+
+* *Maritime Identity Registry.* A centralized authority for identities of persons, organizations or ships that are using the Maritime Cloud. 
+* *Maritime Service Registry.* A centralized repository of service standards and provisioned services world wide.
+* *Maritime Messaging Service (MMS).* A communication protocol on top of TCP/IP. Supporting reliable delivery of messages and geocastingfootnote:[Geocasting refers to the delivery of information to a group of actors identified by their geographical locations.].
+
+This document will concentrate on the security and identity aspects that are nessesary to drive every other service used in the Maritime Cloud.
+
+=== 
+
+=== Non-Goals
+Creating a global identity and security infrastructure for such a complex and diverse domain 
+as the maritime domain is no simple task.
+is no simple task. So it is important that we wherever we can. So there a 
+* While on-ship security is just as important as communication across open channels. I think we can make a pretty clean separation between the two. Making our job easier by not including detailed discussions about on-ship security within this framework.
+* Implementation details. Whereever possible we will keep the discussion on as high a level as possible. Thereby avoiding overspecification of things that might not be actually needed. Or things that turns out to be a really bad idea when it is actually implemented.
+* This document only deals with issue of logical security controls. It makes no mention to any kind of physical control monitor and control the environment of the work place and computing facilities.
+* Non
+
+=== Iterative development and reference implementations
+There have been plenty of grand visions in the area of e-Navigation but so far very few executions that have had the global impact we hope the Maritime Cloud will have. We therefore belive th
+So we believe it is very important.
+
+Another thing we believe dearly in is the.
+Many existing such as, for example, AIS has been developed by a committee without any devel.
+A good . The problem with design byy commitee.
+
+Although is network protocol and not a framework per se. I think the authers are spot on.
+To quote them
+
+No application protocol with as many design problems as AIS has. Would
+have made it out of a committee if a reference decoder had been
+in development in parallel with the specification; implementation
+problems would have thrown them into sharp relief.
+
+The IETF (Internet Engineering Task Force) has a custom of not
+allowing a network protocol design to be published as a proposed
+standard until it has at least two conforming implementations.  This
+would be a good practice for everyone else to emulate.
+ 
+We would go even further and say that as a best practice, the
+reference implementation should be open source. In this way, third
+parties can see exactly what degree of complexity is required to
+implement the standard, exerting a valuable pressure towards simplicity.
+
+
+
+We therefore believe that the reference implemention 
+Where the implementation of the reference implementation is done in close coor.
+This is also not just related to xxx but to every core service in the Maritime Cloud.
+
+
+
+MAC, Hardware/Software token, Kerberos, OpenID
+
+=== Organization of this document 
+Chapter 1 Discusses the various types of resources that we will be working with: users, organizations, shore/ship equipment.
+
+Chapter 2 on Identity. Discusses identity management, identity attributes. Also contains the description of a hypothetical naming scheme called Maritime Resource Names for uniquely identifying any maritime resource on a global scale.
+
+Chapter 3 on Authentication. Discusses passwords, certificates, biometrics, and hardware/software tokens. As well as various forms of multi factor security.
+
+Chapter 4 on Authorization. Discusses access rights to resources. Hereunder access control lists and role/rule based access control. A suggestion for a Maritime Access Policy is also discussed.
+
+Chapter 5 on Cryptography. Discusses asymmetric and symmetric encryption, digital signatures, message authentication codes (MAC), and key distribution. Prop den liste fra stakoverflow ind med digital signature, MAC, HMAC
+
+Chapter 6 on Trust. How do we do vetting of organizations and users.
+
+Chapter 7 on Federation and Integration. Discusses integration issues such as single sign on and technologies such as Kerberos, SAML, OpenID, and OAuth2. As well as integration with onboard systems.
+
+Chapter 8 on Privacy. Discusses privacy of data such as positions.

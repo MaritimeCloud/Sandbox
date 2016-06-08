@@ -1,0 +1,70 @@
+Maritime Cloud
+
+  We employ a number of different technologies
+  MSDL, MMS
+  
+MSDL
+  Ais
+  XML
+   Very verbose
+
+Broadcasting   
+   
+  
+  Position
+  PositionTime
+
+  BroadcastMessage
+    Broadcast messages are messages that are sent to multiple receivers 
+  Endpoints
+     
+Wire Formats
+ Messages
+   JSON/XML
+   Binary  x
+    DecimalDegrees
+     More a less a copy of
+ Broadcasts
+   NAME + message
+ EndpointInvocation
+   NAME + parameters
+   parameters
+   Exceptions
+
+Maritime Messaging Service  
+  An easy and popular way to communicate
+
+  Broadcast 
+    (Man kan vel ogsaa have nogle statiske registrering via rest, med et id?)
+    Subscribe 
+      (id, area, type*) -> no area, use default area, no id+no type -> set default area
+      
+     unsubscribe (id), no id-> unsubscribe all
+    
+    Subscrube 2 (area + type*)
+      no area-> types for default area
+      no types -> sets default area (replace for all subsscriptions)
+      
+    (any type specified will override area of previous type)   
+  
+    (Fungere som en disjunction, der er dog sendt et maximum af 1 besked)    
+    Unsubscribe (type*)
+      unsubcribe for any area, no types=all
+      (x.y.* unsubscriber ikke automatisk x.y.z, kun hvis x.y.* allerede er registreret
+  
+    TTL
+     never forward message older than (24 hours???)
+  
+  
+Service Registry
+Identity registry  
+  
+Security        <<
+  Hash
+    BroadcastMessagesxx2
+    
+    
+Common messages
+  Geometry
+  Units
+  

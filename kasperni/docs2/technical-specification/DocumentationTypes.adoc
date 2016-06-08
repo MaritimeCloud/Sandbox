@@ -1,0 +1,38 @@
+Maritime Cloud Overview - 10 pages
+  (Anyone)
+
+
+Maritime Cloud System Architecture - 50 pages (MMS, MSDL )
+  (Technical People)
+
+  Why not XML
+  
+Maritime Cloud Developer Guide 
+        Java
+         C++
+
+Specifications
+  MMS protocol (RFC)
+    A detailed description of the MaritimeCloud protocol so others can implement it.
+  MSDL (Grammar and shit)
+    A detailed description of the MSDL language so others can use it
+  
+    
+???????
+----------
+core MSDL classes (under MSDL specs)
+MSDL Wireformats
+
+
+Maritime Cloud Technical Specification
+======================
+
+This repository contains the Maritime Cloud Technical Specification. 
+
+The specification is written using AsciiDoctor syntax (a dialect of AsciiDoc) which is similar to other document markup languages such as LaTeX or DocBook.
+However the syntax is easier to remember and the rendering of documents is much faster.
+
+
+Prerequisites
+==
+Install AsciiDoctor using this guide http://asciidoctor.org/#installation

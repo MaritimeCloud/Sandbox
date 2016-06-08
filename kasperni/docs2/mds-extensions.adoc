@@ -1,0 +1,111 @@
+== Extensions
+Kasper Nielsen (DMA) <kasperni@maritimecloud.net>
+
+There are couple of extensions that could be developed that would provide great benefit to some of the users
+
+=== XXXX
+Complains about broadcasts being public.
+
+But for example,
+
+
+=== Auditing
+
+Whenever information is accessed or modified.
+
+
+
+The AWS API call history produced by CloudTrail enables security analysis, resource change tracking, and compliance auditing.
+
+
+
+For example,
+which public key was used to change 
+
+=== Linked Storage
+Privacy, security.
+
+
+
+=== Reporting
+Although of the goals of the Maritime Cloud is electronic transfer of information whereever possible.
+There are situations where it makes sense to create a human readable document that can be printed out. For example, a PDF with detailed information about a ship when it enters a port.
+
+MDS could support this in a similar way to that of 'mail merge'. A mail merge operation is the production of multiple documents from a single template form and some kind of structured data source. The most common usage is probably creating "personalised" letters. Where a template is created with, for example a "Given Name" field. The templated letter says "Dear <Given Name>", and when executed, the mail merge creates a letter for each record in the database, so it appears the letter is more personal.
+
+Users can then, even with little technological savy, create documents based on available data in 
+
+
+
+==== Details
+
+
+Ship Name : ${vessel.name}
+Port Destination : ${vessel.currentDestination.name}
+Cargo Type : ${vessel.currentCargo.type}
+
+vessel = mrn:imo:number:123913011
+
+
+MDS.
+Uploading, for example, a PDF or Microsoft Word template.
+Together with information about id's of the resources that can be used.
+
+Use
+For example, the
+
+return
+
+ship
+
+Users with programming resources can easily do this themself. However, it is much easier for people without any programming experience to create a template it word. And specificy the id's that should be used.
+
+
+
+=== FAQ
+
+Q) Does MDS demand a particular format?
+A) No MDS is only a facilitator of information.
+The market decides who. 
+
+Q) Is MDS safe
+Nothing is ever 100 % safe. But storing data at MDS is safer for most companies that do not
+have the resources to properly guard their security infrastructure
+
+
+
+
+Benifits
+
+** Allows for integration with every national authority. They create every country
+
+One of the. Is that it is easy to 
+
+ T
+
+
+
+For example, you will write a FAL report and then use something similar to using mail merge to create and print letters and other documents.
+
+This means that every registration must be valid against the schema.
+The database will reject any tries to add invalid information.
+
+Maritime (Simple) Database Service (MDS, MSDS)
+It is a simple key-value database. 
+instead it main used for registering.
+
+Usecase
+
+Since IALA does not want to.
+Instead the registration should be delegated to the national authorities
+
+It now wants to allow national authorities the right to manage the registration of individual atons.
+For example, should Denmark be able to modify all under the mrn:iala:aton:dk:* namespace
+Add Access Policy  mrn:iala:aton:dk:* to mrn:mc:id:dma:
+
+
+The MDS supports exports of data. So, for example, card manufactures. Or they can choose to download changes once a day
+${iala.aton.%ID%#name}
+
+
+

@@ -1,0 +1,99 @@
+== Maritime Messaging Service (MMS)
+
+There are couple of features that should be present
+
+* *Bandwidth efficient* The protocol must 
+* *Easy reconnect* Satellite are unreliable. The protocol must be able to cope with this
+* *Secure* Since this. 
+
+
+
+
+Den mest brugte model I of computing is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients. 
+
+
+MMS is a compact and efficient network protocol built on top of TCP/IP and WebSockets.
+
+The maritime
+
+Vi skal kunne kommunikere
+
+One thing we do not want to is force every wessel to have open ports
+
+But they suffer from one major issue: Security. 
+
+
+For example, normally to make a web service available you would need have it running on some port.
+
+Is build around the concept 
+Instead all
+
+=== Protocol Details
+
+The messages that exchanged between MMS clients and MMS servers are divided into 3 groups:
+
+* *Auxiliary messages,* used when connecting/disconnecting and for keep alive signals.
+* *Broadcast messages,* used for transmitting broadcast messages and for subscribing and unsubscribing to broadcast types.
+* *Service message,* used for registering and unregistering services and for invoking remote services.
+
+=== Auxiliary messages
+
+There are currently 5 different auxiliary messages defined
+
+    /** This is the first message sent by the server to client. Whenever a Websocket connection has been created. */
+    WELCOME(1, Welcome.class, Welcome.SERIALIZER),
+
+    /** This is the first message from the client to server. Contains an optional reconnect token. */
+    HELLO(2, Hello.class, Hello.SERIALIZER),
+
+    /** The final handshake massage from the server, contains the connection id */
+    CONNECTED(3, Connected.class, Connected.SERIALIZER),
+
+    /** The final handshake massage from the server, contains the connection id */
+    CLOSE(4, Close.class, Close.SERIALIZER), // client->server
+
+    /** A keep alive message sent periodically. Contains current position/time. */
+    PING(8, Ping.class, Ping.SERIALIZER), //
+
+
+    /** Broadcasts a message (client->server). */
+    BROADCAST_SUBSCRIBE(10, BroadcastSubscribe.class, BroadcastSubscribe.SERIALIZER), // 2. message from server 2 client
+
+    /** Acknowledgment of broadcast message (server->client). */
+    BROADCAST_UNSUBSCRIBE(11, BroadcastUnsubscribe.class, BroadcastUnsubscribe.SERIALIZER),
+
+    /** Relay of broadcast from server (server->client). */
+    BROADCAST_SEND(12, Broadcast.class, Broadcast.SERIALIZER), // 1. message from server 2 client
+
+    /** Acknowledgment of successful broadcast for each client (server->client). */
+    BROADCAST_RELAY(13, BroadcastRelay.class, BroadcastRelay.SERIALIZER), // 1. message from client 2 server
+
+    /** Registers a service with server. (client->server) */
+    BROADCAST_ACK(14, BroadcastAck.class, BroadcastAck.SERIALIZER), // 2. message from server 2 client
+
+    /** Registers a service with server. (client->server) */
+    /* Broadcast */
+
+    /* Endpoint */
+    ENDPOINT_REGISTER(16, RegisterEndpoint.class, RegisterEndpoint.SERIALIZER), //
+
+    ENDPOINT_UNREGISTER(17, UnregisterEndpoint.class, UnregisterEndpoint.SERIALIZER), //
+
+    /** Invokes a service. */
+    ENDPOINT_INVOKE(18, EndpointInvoke.class, EndpointInvoke.SERIALIZER),
+
+    /** Invokes a service. */
+    ENDPOINT_INVOKE_RELAY(19, EndpointInvokeRelay.class, EndpointInvokeRelay.SERIALIZER),
+
+    /** The successful result of invoking a service. */
+    ENDPOINT_INVOKE_RESULT(20, EndpointInvokeResult.class, EndpointInvokeResult.SERIALIZER);
+
+
+
+A detailed description of the protocol is not yet available as it is work in progress. But we aim to publish a detailed specification in such as way that anybody can implement a client.
+
+
+Since we rely on a central server it can check that all messages are valid.  For example, if it is used to transmit binary files.
+
+Endpoints
+  All endpoints defined in MSDL are valid in MMS

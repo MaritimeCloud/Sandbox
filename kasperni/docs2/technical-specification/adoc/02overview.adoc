@@ -1,0 +1,27 @@
+= XML and why every bit counts
+
+XML is a commonly used serialization format for producing a human readable text-based encoding. And XML is probably the most commonly used format for exchanging data world wide. Not only is it used world wide in almost all sectors. But many XML based standards for data exchange already exists. Open Geospatial Consortium (OGC), for example, has published a lot of standards for exchange of geospatial data. LoST (Location-to-Service Translation Protocol)footnote:[http://tools.ietf.org/html/rfc5222] is a XML-based protocol for mapping service identifiers and geodetic or civic location information to a specific service. These are both examples of standards that could be used in the Maritime Cloud.
+
+Unfortunately XML has one major disadvantage that makes it unsuitable as the lingua franca in the Maritime Cloud; Bandwidth overhead.
+
+Compared to a binary protocol such as AIS. An XML document has a very high bandwidth overhead. Even when compressed the size of a XML document is easily a magnitude greater then that of an equivalent representation using an efficient binary protocol.
+
+For example, here is a XML fragmentfootnote:[http://en.wikipedia.org/wiki/Geography_Markup_Language] for the definition of a position in GML which is the OGC standard for expressing geographical features:
+
+[source, xml]
+----
+ <gml:Point gml:id="p21" srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+    <gml:coordinates>45.67, 88.56</gml:coordinates>
+ </gml:Point>
+----
+
+without any whitespace the XML representation takes up 1096 bits (137 bytes). In comparison a position in an AIS message only uses 55 bits. And by using just 64 bits it is possible to represent any position in WGS 84 with a 1 centimetre precision. Actually, an entire AIS message usually takes up less bandwidth then a single position using GML.
+
+The primary barrier to adoption of IP based communication in the maritime world is cost. Not just the initial investment but also the running costs of transmitting data over a satellite connection. Prices for small vessels are up to $30/MBfootnote:[http://www.kvh.com/inmarsatairtime (2014)]. And even for bigger companies the cost of using IP over satellite is non-trivial.
+While communication costs are likely to go down in future. It is unlikely to get to a point where we can completely ignore the cost of bandwidth within the next 10 years.
+
+Likewise, new radio based transmission protocols might provide bandwidth that are a magnitude (or more) larger than AIS. But what good would these new transmission protocols do. If the data that is transmitted takes up a magnitude more space because it is encoded as XML.
+
+As a consequence of these observations we have chosen not make XML (or any other textual format) the default format in the Maritime Cloud. As we find it impossible to justify using up to 10 times more bandwidth then needed just to use existing standards based on XML.
+
+This does not mean that XML cannot be used at all. XML can easily be transmitted as text over the various communication primitives available in the Maritime Cloud or other communication channals defined outside of the Maritime Cloud framework. However, we recommend using the compact binary serialization protocol defined by the Maritime Cloud for any situation where non-stationary actors might participate. Limiting exchange of XML messages strictly to land based actors.

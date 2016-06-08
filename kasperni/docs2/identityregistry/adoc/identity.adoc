@@ -1,0 +1,196 @@
+
+From the presentations, for example, by Fukuto on the Ondo strait.
+
+
+
+For example, a user of the maritime cloud might use the maritime cloud in different. For example,
+one day he might be sailing in his boat. The next day he is working as developer.
+Finally, he also has an official.
+Does he have multiple identies and logins or does he have a single identity.
+
+
+One of the main 
+Complexity of the issue. We could not come any further with this internally in DMA.
+
+=== 
+
+
+The document is a Google Docs and everybody with this link is entitled to update it.
+
+The main purpose of the document is
+* terminonoly
+
+https://ramblingrant.co.uk/the-difference-between-two-factor-and-two-step-authentication/
+
+Limitations:
+ We do not take ship security
+
+=== Goals
+=== Terminology
+
+=== Decisions
+
+==== Open vs Closed, private vs public
+
+Long term Goals
+
+People want to but
+http://eval.symantec.com/mktginfo/enterprise/articles/b-article_security_organization_20_building_a_robust_security_organization.en-us.pdf
+Short term goals
+Must be broken down into smaller releases
+For example, 
+SSL for MMS.
+
+Open vs Closed. 
+Non-Solas vs solas.
+
+
+Looking forward 5-6 years.
+BYOD
+Victoria and Japan are already. 
+Mention microsoft
+
+=== Centralized vs Distributed
+Distributed: lots of overhead.
+From an implementation 
+
+There are organizations where
+
+But I'm having trouple 
+=== 
+There 
+
+* send beskeder uden at blive opsnappet
+* Lad folk verificere
+
+* ease of use
+ Must be easy to use. Otherwise people don't use it. Requiring a user to change password every week. Makes them put note-it on their
+ available for everyone to read.
+ Bad user experience might lead to poor
+security as many users opt for convenience rather than security (Confident
+Technologies, 2011). http://confidenttechnologies.com/news_events/survey-shows-smartphone-users-choose-convenience-security/
+ 
+ A rigid set of security policies simply creates the illusion of security. Since most employees are only aware of security as an impediment, then presumably the larger the impediment, the more secure the company must be. Of course, the opposite it true. As security becomes more rigid, it is also more complex and less easy for users to understand and practice.
+
+As the corporate culture becomes exhausted by restrictive rules, it develops an immunity of sorts: the rules start getting broken in small but cumulative ways. Rigid security is like a brick house in an earthquake. It may appear stronger than the wooden house next door, but when it can't bend gracefully to accept and dissipate the change, it suffers structural failure.
+
+
+
+
+
+
+I think 
+
+=== Terminology
+Before going into more detail. There are som terminology that needs to defined. This is not an extensive list. Just enough to get the most basic stuff in place:
+
+==== Subject
+A _subject_ or sometimes _entity_ is a person, organization, ship, software program, machine, or some other thing making a request that accesses a _resource_ in some way. 
+
+==== Resource
+A _resource_ is a virtual or physical item such as a web page, ship information, payment transaction, or some data in a database. 
+
+==== Identity
+To gain access to the resource, the subject lays claim to an _identity_ (sometimes digital identity). 
+
+An identity contains data that uniquely describes a subject but also contains information about the subject's relationships with other subjects or entities.
+
+A subject can have multiple identities. For example, one identity as an employee in Acme Shipping and another indentity as a Chairman in IALA.
+
+Attributes, preferences and traits[edit]
+Every Digital Identity has zero or more identity attributes. Attributes are acquired and contain information about a subject, such as medical history, purchasing behaviour, bank balance, age and so on.[1] Preferences retain a subject's choices such as favourite brand of shoes, preferred currency. Traits are features of the subject that are inherent, such as eye colour, nationality, place of birth. While attributes of a subject can change easily, traits change slowly, if at all.
+“n this context, identities are collections of data about a subject that represent attributes, preferences , and traits . Attributes are acquired, describing information about a subject such as medical history, past purchasing behavior, bank balance, credit rating, dress size, age, and so on. Preferences represent desires such as preferred seating ”
+
+
+==== (digital) identifiers
+An identity fundamentally requires some kind of a identifier—string or token that are unique within a given scope.
+In this case a within the Maritime Cloud. Identifiers are the key used by the parties to an identification relationship to agree on the entity being represented.
+
+==== Credentials
+To use an identity to justify accessing a resource, a subject must present _credentials_ when requesting access to a resource. Credentials are proof that a specific subject has the right to assert that a particular identity belongs to them. Credentials are a way of transferring trust between different subjects.
+
+When credentials are presented to a security authority or sometimes _policy enforcement point (PEP)_, the authority authenticates the given credentials. Either directly or using a separate authentication server.
+
+Credentials can be authenticated using many different methods, including simple username and password, X.509 certificates, or biometrics such as fingerprint or retina scanning. 
+The level of authentication required to access a resource is usually proportional to the consequence of a resource being exploited.
+
+==== Authentication
+
+
+==== Authorization
+Authorization is the function of specifying access rights to _resources_ related to information security and computer security in general and to access control in particular. More formally, "to authorize" is to define an access policy. For example, human resources staff is normally authorized to access employee records and this policy is usually formalized as access control rules in a computer system.
+
+For example,
+Maritime Access Policy (MAP)
+The possibilities are endless. And I think this could be an interesting area for one of our Academic partners. 
+
+http://telicthoughts.blogspot.dk/2011/02/authentication-concept-map.html
+
+For example, the owner of a ship can give access to a broker to edit the cargo part of a XUSZ
+
+Access to a live AIS stream for a period with the API .
+By standadizing on a format for. It will be easy to integrated and further e-navigation process
+
+Something with all SOLAS
+
+The right part of the equation can also be used to, for example,
+
+==== Trust
+
+Once the credentials are authenticated, the authority retrieves the security policy for the resource or passes them to a separate policy decision point (PDP) .
+
+The PDP uses the policy and asserted identity to determine the entitlements and permissions associated with that resource for the asserted identity. 
+Entitlements are the services and resources to which an identity is allowed access. Examples include a credit limit, disk space or bandwidth allocations, and so on. 
+Permissions are the actions that the subject is allowed to perform with respect to the resource, such as withdrawing funds, completing a[…]”
+“sions associated with that resource for the asserted identity. Entitlements are the services and resources to which an identity is allowed access. 
+Examples include a credit limit, disk space or bandwidth allocations, and so on. Permissions are the actions that the subject is allowed to perform with respect to the resource, such as withdrawing funds, completing a purchase, or updating a record.
+
+When the PDP transfers this information back to the PEP, it does so in an authorization decision assertion (ADA).
+
+Finally, the PEP either allows or denies the action.”
+
+
+==== Privacy
+Privacy is the protection of the attributes, preferences, and traits associated with an identity from being disseminated beyond the subject's needs in any particular transaction.
+
+
+
+==== Federation
+==== Factors
+
+=== Identifier
+An indentity uses Something that uniquely indentifies an Indent
+Fixed length versus variable length. 
+
++ Fixed length
+IMO number+ MMSI number are fixed length
+
+- Fixed length
+Every bit counts: IDs are transmitted with every message 
+
+
+Embedding country information in the ID.
+Does not really make sense. For example a person might change organization or move to a foreign country.
+Likewise an organization might change its headquarter from one country to another.  
+https://github.com/google/u2f-ref-code/tree/master/u2f-ref-code/java/src/com/google/u2f/server
+https://air.mozilla.org/fido-u2f/
+https://johnlyle.com/wash13/fido.pdf
+http://www.trishburgess.com/trishs-blog/intro-to-openid-oauth-and-saml
+  MMSI
+
+=== Going forward
+Short term,
+  Decisions on how an ID should look like
+
+
+===== Authentication
+Low
+
+key value pair (for example, for rest)
+Private key + public key (can generate it for you if you want to).
+Create certificate
+
+
+
+
+

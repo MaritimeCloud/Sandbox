@@ -1,0 +1,233 @@
+== Maritime Database Service
+Kasper Nielsen (DMA) <kasperni@maritimecloud.net>
+
+This document is a proposal to add another core service to the Maritime Cloud in addition to the existing Identity Registry, Service Registry and Maritime Messaging Service. The design is not final in any way. But is merely meant as a starting point for discussions. 
+
+=== Overview
+The Maritime Database Service (MDS) is a non-relational hierarchical database service that provides secure, fast, and predictable performance with seamless scalability. Its main purpose is to help with easy sharing of maritime information to selected stake holders.
+
+The Maritime Database Service can be useful, for example, for sharing dynamic information such as route and cargo information, coordination of search and rescue efforts, or regular reporting of the emission of a vessel. It can also store static information such as static ship information or details about ATONs.
+
+=== Background
+The Maritime Database Service stems from the need to store information for the Identity and Service Registry. 
+Instead of just making a database that can store information from these two registries why not make a general usable database for maritime data. In this way we people can create similar services without having to worry about availability and backup of their data. For many registries the cost of storage is negliable. 
+
+Many stakeholders. For example, has a handfull of data.
+
+There are many similiar registries throughout
+
+
+This also means that, for example, the functionality of the Almanac .
+
+Can be extended with all kinds of information, 
+A central piece of the Maritime Cloud is the almanac which. 
+Building you can create a similar almanac of any kind of data.
+For example, ATON information.
+
+
+=== Use case
+Each piece of information has a single owner that fully control the data that is uploaded. The owner can choose who exactly should have access to the data owned by him on a very fine grained level. For example, the owner of a particular ship might choose that the name of the ship is available for anyone to read. While the next port of the ship is only visible to validated VTS centers.
+
+If the owner of the ship has given the destination port read access to all the required information for a FAL report. The report can be generated automatically by the destination port by extracting necessary information from the database. Without involving the crew, agent or owner of the ship. If the owner has chosen not to make the information visible he is required to use traditional means such as paper based forms.
+
+The database also supports extracting batches of data to a fileformat chosen by the user. For example, a governing organization might choose to download all emission reports by a selected ship (if allowed by the ships owner) from a time period. Or a chart manufacture might choose to download information about all ATONs that have changed during the last 24 hours every day. 
+
+Push notifications on updated information is also supported. If you have the right to read a particular piece of information you can also subscribe to receive an update whenever the particular information is changed. By subscribing to information, you will get an update message immediately after the information has been updated, for example, by email, SMS or some other electronic form. For example, you might want to receive an email whenever an Emergency Wreck Marker Buoy is placed in a particular area. Or you might want to get the update via the Maritime Messaging Service in order to automatically push information about the buoy to your customers.
+
+The Maritime Database Service is unbiased and does not mandate or place restriction on the type of data that can be stored. But allows every organization to decide on the exact format of the data they want to store. For example, there might be two or more competing formats for an emission  supported by different organizations. Just like  The service can merely be used as a foundation for easily sharing of information. Whatever that information might be.
+
+An important feature is linked data. Where the owner of the data chooses to host his own data. And instead registers a link with MDS to where the data is located on his own server. 
+
+
+He will also have to check the authenti
+
+
+You can also choose to host the data yourself. And instead registered links to the location of the data.
+Maintaining backups and 24/7 availability. Also data is always validated before entering the MDS
+
+=== Functionality
+
+A quick list of functionality 
+* Always on. 
+* Find grained querying mechnism based on standars,
+For example, if mrn:iala:aton:us:1234X5 revers to xxxxx.  mds.maritimecloud.net/query/iala/aton/us/1234X5#atonOwnerAuthority
+
+
+* Flexible, for example, for use in a SAR exercise
+ for exmaple  querying 
+* Fine grained access control on a single field level
+* Easy integration with organizations existing IT systems
+* Flexible rapporting based on available data.
+
+Like all core other services in the Maritime Cloud the aim is to create a simple, secure and the keep it simple.
+
+=== Implementation
+
+=== Limitations
+* It is (currently) not meant for storing large amounts of dynamic data. For example, AIS data.
+* It also does not support advanced querying capabilities such as SQL.
+* Furthermore there are no support for complex onlince analyzation. Instead data must be downloaded or exported into other systems before it can be analyzed. 
+
+
+=== Datamodel
+Ordered in a tree model. With the name of the owning organization of the root.
+Every Element has a mandatory data type which can be one of TXT, Binary, MSDL-JSON, MSDL-BINARY, XML, JSON
+A Element can have an optional schema attached. For example, a XML schema or a datatype in defined as message in MSDL
+
+=== Inheritance of attributes
+
+Hmm, giver vi folk adgang til at skrive i /iala/aton/dk/....
+eller mapper vi dem
+1) adgang
+Maaske svaert at se praecis hvilken information man har
+Men vi kan jo have en liste.
+
+Vi giver dem adgang. Naar man kommer ind paa sin "hjemmeside" ligger iala paa samme niveau som sit organizations navn
+
+=== Security
+The security of data stored in the Maritime Database Service is based on functionality of the identity registry. More particular 
+
+Lav en 
+Take 
+Give everyone access to route.name 
+Give everyone access to route.eta  
+Give everyone access to route.destination.port
+
+Even though.
+Tools will be built ontop of the complex security model.
+That will allow easier access for users
+
+=== Usecases
+
+Fal rapporting
+
+It is tightly integrated with the Identity 
+It places no restricting of the type of data that can be stores. And makes.
+
+Whatever organizations are using the 
+
+But merely serves as simple, but yet flexible way to store small amounts of structured data.
+Supporting fine grained access control.
+
+=== Integration with existing systems.
+For example, 
+
+Creating, Reading, Updating, Deleting
+
+For example, integration i
+-> update it in MDS->
+
+Subscribers of particular information gets notified.
+
+
+
+=== Requesting access.
+Future work, could also support. For example
+For example, while
+
+
+=== Extracting information
+The predominant way.fke.
+msd.maritimecloud.net/iala/aton/DK/230102
+
+> curl msd.maritimecloud.net/seaswim/route/X8282dd#estimateTimeOfArrival
+
+
+=== Information Subscribers
+
+There are basically two approaches. 
+For example, in safety situations where every second counts.
+
+If you have read-access you will automatically also be able to subscribe to updated information. This means, for example, if a port operator subscribes and have the right credentials to the eta of a particular route. It will get a notification within seconds after the captain or owner has updated the information in the database.
+Anyone with admin rights will be able to see the subcribers of information
+
+
+=== Automatic Auditing.
+By having a central database where only authenticated updates can be made.
+It is very simple to create and store are complete list of 
+
+ store a Who, When and What for every update.
+Who did the update (username/identity, IP address) possible even on behalf of  (For example, a broker changing it).
+When what time was the audit made.
+
+
+=== Usecases
+
+
+==== Reporting and Templating
+One of the. Is that it is easy to 
+
+For example, you will write a FAL report and then use something similar to using mail merge to create and print letters and other documents.
+
+This means that every registration must be valid against the schema.
+The database will reject any tries to add invalid information.
+
+Maritime (Simple) Database Service (MDS, MSDS)
+It is a simple key-value database.
+Does not support advanced querying capabilities 
+instead it main used for registering.
+
+Usecase
+
+Since IALA does not want to.
+Instead the registration should be delegated to the national authorities
+
+It now wants to allow national authorities the right to manage the registration of individual atons.
+For example, should Denmark be able to modify all under the mrn:iala:aton:dk:* namespace
+Add Access Policy  mrn:iala:aton:dk:* to mrn:mc:id:dma:
+
+
+The MDS supports exports of data. So, for example, card manufactures. Or they can choose to download changes once a day
+${iala.aton.%ID%#name}
+
+//Listeners
+Temporary markers. 
+//National authority creates Marker in own database.
+//Sync to MDS
+//Sends a message to every listener
+National authorities will have no need to develop der own custom software for notifying.
+
+//Coordinate SAR
+International agreed upon scheme for Search And Rescue missions.
+For example, in case of an emergency all ships in the particular area would give access to their location
+Extract a SAR report.
+Subscribe to information about aton within reach of any of my ships.
+
+
+
+
+
+
+
+
+Register MRN schemas
+mrn:iala:aton:$CountryCode$:[a-z]
+
+MID
+
+Registrer keyspaces
+mrn:iala:aton:{CC}:[a-z1-9]{3,20}
+Registrer MSDL file
+{
+	position = xxxx
+	text name     = SDSKDJ
+	binary picture  = 
+
+
+}
+
+${iala.aton.CC.$vessel}
+Thereby providing the owner of information with flexible tools to decide who can access and change the information.
+
+FAL-RAPPORT
+
+
+==== Financing
+The Maritime Database Service is obvoius way 
+An obvious way of contributing to the contining development of the Maritime Cloud.
+Would be have all users paying.
+for example 0.0001 $ for each received via a listener
+1 $ pr one gigabyte of storage per month. With the first 100 mb free
+
+
+||organization||fullId||

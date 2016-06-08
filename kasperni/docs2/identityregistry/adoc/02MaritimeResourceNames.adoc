@@ -1,0 +1,354 @@
+== Maritime Resource Names
+This chapter contains the suggestion for a global maritime naming scheme called *Maritime Resource Name* or *MRN* for short.
+
+However, they all suffer, like many ot
+They are reinvented every time.
+IALA Recommendation on Use of Navigation Unique Identifiers
+
+
+The Maritime Resouce Naming scheme has the following charistics
+Recently the xxx. It is imperative that come of with a naming scheme that both
+* Every id is unique
+* Flexible, new organisation and naming schemes can evolve without the need for a central coordinater. 
+* The govorning organization can always be identified by looking at the name.
+
+
+*
+* make sure that the govorning body can be identfied from the id
+
+that allows for introducing new types of identifiers without interfering with the way that existing identifiers are used.
+
+ . I'm open for other suggestions. But I think the name captures the fact t
+
+
+
+
+As can be seen from the various examples, the general idea is that major organizations are assigned a namespace under mrn, for example IMO would obviously get "mrn:imo".
+IALA would get "mrn:iala" or possible "mrn:iala-aism" and so on. While not prohibited in any way. We do not expect. Even if a ship is owned by a company such as maersk. The ID of the ship would be determined of a governing body and registered under that body, for example, "mrn:imo:mmsi:xxxxxx".
+The organization having is more or less free to use any. However, we would provide guidelines and informal standards for. For example, mrn:ORGNAME:publications:PUBLICATION_ID could be used as the general way of referering to public documents.
+
+Now, Maritime Resource Names are like telephones numbers with country codes and area codes.
+Most of the time you do not need to provide the country code. For example, 
+However, if you need to integrate with other ecosystems in the maritime world you with probably use the full name
+"mrn:SeaSWIM:route:XCUS231230"
+
+
+
+A Uniform Resource Identifier (URI) is a compact string of characters
+   for identifying an abstract or physical resource.  This document
+   defines the generic syntax of URI, including both absolute and
+   relative forms, and guidelines for their use;
+
+
+
+1.1 Overview of URI
+
+   URI are characterized by the following definitions:
+
+      Uniform
+         Uniformity provides several benefits: it allows different types
+         of resource identifiers to be used in the same context, even
+         when the mechanisms used to access those resources may differ;
+         it allows uniform semantic interpretation of common syntactic
+         conventions across different types of resource identifiers;
+
+         it allows the identifiers to be reused in many
+         different contexts, thus permitting new applications or
+         protocols to leverage a pre-existing, large, and widely-used
+         set of resource identifiers.
+
+      Resource
+         A resource can be anything that has identity.  Familiar
+         examples include an electronic document, an image, a service
+         (e.g., "today's weather report for Los Angeles"), and a
+         collection of other resources.  Not all resources are network
+         "retrievable"; e.g., human beings, corporations, and bound
+         books in a library can also be considered resources.
+
+         The resource is the conceptual mapping to an entity or set of
+         entities, not necessarily the entity which corresponds to that
+         mapping at any particular instance in time.  Thus, a resource
+         can remain constant even when its content---the entities to
+         which it currently corresponds---changes over time, provided
+         that the conceptual mapping is not changed in the process.
+
+      Identifier
+         An identifier is an object that can act as a reference to
+         something that has identity.  In the case of URI, the object is
+         a sequence of characters with a restricted syntax.
+
+   Having identified a resource, a system may perform a variety of
+   operations on the resource, as might be characterized by such words
+   as `access', `update', `replace', or `find attributes'.
+
+
+
+=== A unique namespace
+
+The purpose of the "mrn" namespace is to assign an unequivocal identifier, in standard format, to entities regarding the maritime domain.
+To the extent of this namespace, "entities" include any legal document within the domain of legislation
+
+The identifier is conceived so that its construction depends only on the characteristics of the resource itself and is, therefore, independent from the resource's on-line availability, its physical location, and access mode.
+
+
+service instance (vi kan godt have organizations navnet/id'et med, eftersom
+man kan ikke kan flytte den til en anden)
+
+==== Open questions
+Internationalization. 
+
+
+
+
+--Faar man automatisk assignet et id. Proever saa vidt muligt at
+returnere det samme hver gang
+ IP, StackTrace
+Hmmm
+
+
+Moede
+-> Mutual benefit
+-> We expect all work that are done in this group to be released as Open Source
+   Since this is the core
+   Not All services
+   Serioest personale problem, vi maa fortaelle 
+   As a minimum closed sourced, but free.
+   We intended do be able to deliver a complete a virtual image. Deployable by anyone.
+
+   http://stackoverflow.com/questions/2837553/saml-vs-federated-login-with-oauth
+
+   Releases will be done
+
+
+Task 3.4 Implementation
+-> Med mindre folk, Jeg kommer til at arbejde mindre med implementeringen.
+
+Dokumenter
+  Identity and Security in the Maritime Cloud
+
+  Developerment process in the maritime cloud
+   Android og IOS aarlige releases
+
+
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https.html
+security, moving away from
+
+Proven successfull in a lot of technology sectors
+
+Intel CPU, Samsung, Apple iPhone every year.
+
+Maritime Cloud Contributor Guide
+Maritime Cloud Release Planning
+Maritime Cloud Security 0.1
+
+
+1 version
+Entities
+ Physical equipment (phones, on-board, PCs, Laptops, iPad, )
+ Organization
+ Users (Leisure Suit sailors, )
+
+
+Id format
+  fixed 
+
+
+
+Host website hos amazon istedet for GitHub.
+Det bliver efterhaanden ret stort naar man udskifter det konstant
+
+
+Technical Spec,   
+
+Uniform Resource Names (URNs) are conceived by the Internet community
+for providing unambiguous and lasting identifiers of network resources, independently
+from their physical locations, availability and actual publication.
+
+
+In particular they play a key role in the legal domain where references to
+other legislative measures are very frequent and extremely important: the
+possibility of being able to immediately providing effective references and
+accessing legal documents is a desirable feature able to promote transparency
+and “certainty of law”. 
+
+Moreover the growing necessity of improved quality and accessibility of maritime information amplifies the need for interoperability among maritime information systems in national and international setting.
+
+
+A persistent, shared, open standard identifier for maritime resources at an international
+level is an essential prerequisite for establish such interoperability.
+
+
+Besides legal content providers, Internet content creators including publishers
+operating well outside the traditional arenas of legal publishing (news,
+technical documentation providers, etc.) can benefit by this standard because
+it facilitates the linking of legal documents and reduces the cost of maintaining
+documents that contain such references. T
+
+
+
+== Maritime Resource Names
+Recently the xxx. It is imperative that come of with a naming scheme that both
+* Every id is unique
+* Flexible, new organisation and naming schemes can evolve with the need for a central coordinater. 
+* make sure that the govorning body can be identfied from the id
+
+that allows for introducing new types of identifiers without interfering with the way that existing identifiers are used.
+
+So I would like to suggest a naming scheme called  Maritime Resource Name or MRN for short. . I'm open for other suggestions. But I think the name captures the fact t
+
+Starting with a couple of fictive examples, to give a general idea about how they would look. These are all fictive and any final version will most likely look a lot different.
+
+
+
+A predefined area such as the Baltic Sea defined by an organization such as IHO
+mrn:iho:area:BalticSea
+
+A user from DMA in the Maritime Cloud called David
+mrn:mc:identity:dma:user/David
+
+A ship from Maersk with more than one idenfier: a IMO number, a MMSI number and a Maritime Cloud identity:
+mrn:mc:identity:maersk:ship/XYSYAYS
+mrn:imo:number:12312312323
+mrn:ietf:mmsi:239812122
+
+The proposed structure permits a bridging between the current national identifiers that 
+
+already exist in lists of lights, e.g. US light list number 1234.5
+mrn:iala:aton:us:1234X5
+
+A unique route used in SeaSWIM.
+mrn:SeaSWIM:route:XCUS231230
+
+A deployed MSI service on the Maritime Cloud:
+mrn:mc:service:instance:dma:MSI_98823
+
+The 12th version of a route from DMA BroadcastEndpoint defined in the Maritime Service Definition Language
+mrn:mc:msdl:dma.route:BroadcastEndpoint:v12
+
+As can be seen from the various examples, the general idea is that major organizations are assigned a namespace under mrn, for example IMO would obviously get "mrn:imo".
+IALA would get "mrn:iala" or possible "mrn:iala-aism" and so on. While not prohibited in any way. We do not expect. Even if a ship is owned by a company such as maersk. The ID of the ship would be determined of a governing body and registered under that body, for example, "mrn:imo:mmsi:xxxxxx".
+The organization having is more or less free to use any. However, we would provide guidelines and informal standards for. For example, mrn:ORGNAME:publications:PUBLICATION_ID could be used as the general way of referering to public documents.
+
+
+
+
+
+A Uniform Resource Identifier (URI) is a compact string of characters
+   for identifying an abstract or physical resource.  This document
+   defines the generic syntax of URI, including both absolute and
+   relative forms, and guidelines for their use;
+
+
+
+1.1 Overview of URI
+
+   URI are characterized by the following definitions:
+
+      Uniform
+         Uniformity provides several benefits: it allows different types
+         of resource identifiers to be used in the same context, even
+         when the mechanisms used to access those resources may differ;
+         it allows uniform semantic interpretation of common syntactic
+         conventions across different types of resource identifiers;
+
+         it allows the identifiers to be reused in many
+         different contexts, thus permitting new applications or
+         protocols to leverage a pre-existing, large, and widely-used
+         set of resource identifiers.
+
+      Resource
+         A resource can be anything that has identity.  Familiar
+         examples include an electronic document, an image, a service
+         (e.g., "today's weather report for Los Angeles"), and a
+         collection of other resources.  Not all resources are network
+         "retrievable"; e.g., human beings, corporations, and bound
+         books in a library can also be considered resources.
+
+         The resource is the conceptual mapping to an entity or set of
+         entities, not necessarily the entity which corresponds to that
+         mapping at any particular instance in time.  Thus, a resource
+         can remain constant even when its content---the entities to
+         which it currently corresponds---changes over time, provided
+         that the conceptual mapping is not changed in the process.
+
+      Identifier
+         An identifier is an object that can act as a reference to
+         something that has identity.  In the case of URI, the object is
+         a sequence of characters with a restricted syntax.
+
+   Having identified a resource, a system may perform a variety of
+   operations on the resource, as might be characterized by such words
+   as `access', `update', `replace', or `find attributes'.
+
+
+
+=== A unique namespace
+
+= Maritime Resource Name
+
+
+= Maritime Resource Name
+
+
+
+
+== URI
+A Uniform Resource Identifier (URI) is a compact sequence of characters that identifies an abstract or physical resource.
+A well known group of URIs are those used when visiting any webpage using ""
+
+A URI can be further classified as a locator, a name, or both. The term “Uniform Resource Locator” (URL) refers to the subset of URIs that, in addition to identifying a resource, provide a means of locating the resource by describing its primary access mechanism (e.g., its network “location”).
+
+
+Similar to how you can use an URL to dinguish the billions of webpages that exists today.
+
+
+This chapter contains the suggestion for a global maritime naming scheme called *Maritime Resource Name* or *MRN* for short.
+
+However, they all suffer, like many ot
+They are reinvented every time.
+IALA Recommendation on Use of Navigation Unique Identifiers
+
+== MRN format
+mrn:<GoverningOrganization>:<ResourceType>:.....
+
+
+
+== MRN and the Maritime Cloud
+As part of the Identity Registry of the Maritime Cloud.
+Organizations will.
+
+A container
+
+
+
+== URI
+A Uniform Resource Identifier (URI) is a compact sequence of characters that identifies an abstract or physical resource.
+A well known group of URIs are those used when visiting any webpage using ""
+
+A URI can be further classified as a locator, a name, or both. The term “Uniform Resource Locator” (URL) refers to the subset of URIs that, in addition to identifying a resource, provide a means of locating the resource by describing its primary access mechanism (e.g., its network “location”).
+
+
+Similar to how you can use an URL to dinguish the billions of webpages that exists today.
+
+
+This chapter contains the suggestion for a global maritime naming scheme called *Maritime Resource Name* or *MRN* for short.
+
+However, they all suffer, like many ot
+They are reinvented every time.
+IALA Recommendation on Use of Navigation Unique Identifiers
+
+== MRN format
+
+
+
+
+== MRN and the Maritime Cloud
+As part of the Identity Registry of the Maritime Cloud.
+Organizations will.
+
+A container
+mrn:bic:containerid:X23ds9293
+
+
+service instance (vi kan godt have organizations navnet/id'et med, eftersom
+man kan ikke kan flytte den til en anden)

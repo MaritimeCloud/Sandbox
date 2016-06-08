@@ -1,0 +1,47 @@
+== Almanac
+
+RodCertifikat
+  AlmanakCertifikat
+  MMSServerCertifikat
+
+
+Skal kunne synke mellem devices.
+
+=== Operations
+  update with block
+  
+  // Queries
+lookup info for a given id
+
+Port soegning
+Faktisk alle soegninger man kunne lave i 
+identity registry+
+service registry
+
+
+=== Blocks
+A continues id.
+The first block is named 1.
+
+Each block is signed by the central Almanac Server of
+  id + alle operations
+
+http://almanac.maritimecloud.net/block/latest <- returns int
+http://almanac.maritimecloud.net/block/123 <- returns int
+
+http://almanac.maritimecloud.net/block/123 <- returns int
+http://almanac.maritimecloud.net/blocks/123?maxSize=10000000 <- returns int
+  length -> block, length->block, length->block
+
+120*365=40000 blokke om aaret vi skal have mulighed for at pakke flere blokke sammen i et request.
+
+---Skal vi have flere almanakker 
+  f.eks. en identity og en service?? syntes ikke de skal helst foelges ad.
+  Det var mest taenkt for at vi ikke skal have alle opdateringer
+
+
+=== Android
+Man kan vel forstille sig en android app med alt data fra almanakken??
+
+
+

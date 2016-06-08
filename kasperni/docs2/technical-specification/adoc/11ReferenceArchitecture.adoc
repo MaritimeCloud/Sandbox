@@ -1,0 +1,26 @@
+== Reference Server Architecture
+While this specification does not mandate anything implentation wise.
+Nevertheless we want to share the architecture that have been used for implementation the server part of the Maritime Cloud. 
+
+The reference architecture is split up into three separate layers. 
+
+* *Infastructure Services,* are various components and products that are not exposed to remote clients.
+* *Core Services,* are the implementation of services such as MMS or the Service or Identity Registry. Core services make use of common infrastructure services. For example, we have a shared database that both the Service or Identity Registry uses.
+* *Clients,* are ships, tablets, service providers that makes use of the services provided by the Maritime Cloud.
+
+
+=== Software
+All the software we have choosen to use is open source and free of charge.
+As we want anyone to be able to run their own infrastructure without any costs.
+We even hope to provide a virtual image at some point that people can just start up in a virtual machine.
+
+==== Java
+We have standardized on a single platform for all our components: Java 8.
+This is mainly due to competencies of the the initial te 
+
+==== Cassandra
+The Apache Cassandra database is the right choice when you need scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data. Cassandra's support for replicating across multiple datacenters is best-in-class, providing lower latency for your users and the peace of mind of knowing that you can survive regional outages.
+
+==== ActiveMQ
+
+

@@ -1,0 +1,24 @@
+  MSDL (Grammar and shit)
+    A detailed description of the MSDL language so others can use it
+    Wireformats
+      JSON
+      XML
+      BINARY (The Maritime Cloud compact binary encoding (CBE) CBE));
+        is a format for encoding
+        structural data messages. The format is designed to be
+        • simple - it tries to minimize the number of encoding
+          artifacts, primitive constructs, and the ways they can be
+          combined,
+        • efficient - encoders and decoders can be efficiently
+            implemented in software or hardware,
+        • and compact - encoded messages are reasonably
+             compact due to the extensive use of variable-length
+             coded data fields and the lack of inline meta data.
+        • forward - to allow future extensions
+    
+    
+    
+    
+???????
+----------
+core MSDL classes (under MSDL specs)
