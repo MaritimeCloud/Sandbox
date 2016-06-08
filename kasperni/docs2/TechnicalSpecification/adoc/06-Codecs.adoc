@@ -1,0 +1,164 @@
+== Message Codecs
+A Message codecs is a computer program capable of encoding or decoding a digital data stream or signal.
+
+
+There are two default codecs that must be present in all Maritime Cloud implementations.
+
+//Use s standard example
+
+[source]
+----
+namespace dma.route;
+
+/** The heading of each leg. */
+enum EnumType {
+    VAL1 = 1;
+    VAL2 = 2;
+}
+
+/** A route leg. */
+message Leg {
+    /** The speed over ground in knots. */
+    1: float speed;
+
+    /** Cross track starboard distance in meters. */
+    2: float xtdStarboard;
+
+    /** Cross track port distance in meters. */
+    3: float xtdPort;
+    
+    /** The heading of the leg. */
+    4: HeadingType headingType;
+    
+    /** The length of the navigational window in meters. */
+    5: float navWindow;
+}
+
+/** A waypoint in a route. */
+message Waypoint {
+
+    /** The position. */
+    1: position waypointPosition;
+
+    /** The planned or estimated time of arrival at the waypoint position. */
+    2: timestamp eta;
+
+    /** The rate of turn of the waypoint. In degrees */
+    3: float rot;
+
+    /** The turn radius of the vessel. In nautical miles. */
+    4: float turnRadius;
+    
+    /** The waypoints outleg, will be null for the final waypoint. */
+    5: Leg outleg;
+}
+
+/** Route. */
+message Route {
+    /** A list of waypoints on the route . */
+    1: list<Waypoint> waypoints;
+    2: text routename;
+}
+
+
+/** Status of the Route Suggestion. */
+enum RouteSuggestionStatus {
+    PENDING = 1;
+    ACCEPTED = 2;
+    REJECTED = 3;
+}
+
+endpoint TacticalRouteEndpoint {
+
+  void RouteSuggestion(
+    /** The suggested route */
+    1: Route route;
+    
+    /** The transaction ID */
+    2: int64 id;
+
+    /** The status, used for replying*/
+    3: RouteSuggestionStatus status;
+  );
+}
+----
+
+=== JSON Codec
+This codec uses human readably JSON messages on the wire.
+
+Each message is serialized as an JSON object. Where each message field is added as a name/value pair to the JSON object.
+The value of the field is serialized according to its type:
+[cols="3,7,7", options="header"]
+|===
+|Name
+|Description
+|Representation
+
+|boolean
+|True or False
+|A JSON boolean
+
+|binary
+|Arbitrary bytes (no validation)
+|base 64 encoded string
+
+|decimal
+|Arbitrary-precision decimal
+|A JSON number
+
+|double
+|64-bit IEEE-754 floating point
+|A JSON number
+
+|enum
+|32-bit IEEE-754 floating point
+|The name of the enum value
+
+|float
+|32-bit IEEE-754 floating point
+|A JSON number
+
+|int
+|32-bit signed integer
+|A JSON number
+
+|int64
+|64-bit signed integer
+|A JSON number
+
+|list
+|Ordered collection of one or more elements
+|A JSON array
+
+|position
+|Latitude+Longitude
+|A JSON Object with "latitude" and "longitude"
+
+|positiontime
+|position + timestamp
+|A JSON Object with "latitude", "longitude" and time
+
+|set
+|Collection of one or more unique elements
+|A JSON array
+
+|text
+|UTF-8 encoded string
+|A JSON string
+
+|timestamp
+|Date plus time since epoch (64-bit)
+|A integer with milliseconds since epoch
+
+|varint
+|Arbitrary-precision integer
+|A JSON number
+
+|===
+
+Using the 
+
+
+=== Binary based
+Binary based serialization
+

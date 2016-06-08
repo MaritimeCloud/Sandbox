@@ -1,0 +1,88 @@
+== MSDL
+MSDL is an interface description language footnote:[http://en.wikipedia.org/wiki/Interface_description_language] or specification language used for describing the interface of a particular set of services in the Maritime Cloud. MSDL is to the Maritime Cloud what IDL is to Corba and what WSDL is to XML based web services. 
+
+In order to develop new services that can be used with the Maritime Messaging Service you need to specify the interfaces of the services in a MSDL file.
+
+Unlike, for example, the XML based counterpart WSDL. MSDL does not dictate they kind of encoding being used. For example, some might choose to use a binary encoding to encode their messages. While others might choose a text based encoding. To do so various codecs are developed
+
+Instead encoders and decoders are created in pair.
+
+[ditaa, "msdl", "png"]
+....
+       +-----------------+                         +-----------------+
+       |    Company A    |                         |    Company B    |
+       |   Source Code   |                         |   Source Code   |
+       +-----------------+                         +-----------------+
+            |      ^                                   |      ^    
+            v      |                                   v      |
+       +-----------------+      +-----------+      +-----------------+
+       | Stubs Generated | <--- |  Shared   | ---> | Stubs Generated |
+       | From MSDL files |      | MSDL file |      | From MSDL files |
+       +-----------------+      +----------=+      +-----------------+
+            |      ^                                   |      ^    
+            |      |<----------- Same codec ---------->|      |
+            v      |                                   v      |
+       +-----------------+   +-----------------+   +-----------------+
+       | 010101000010100 |<--|     Binary      |-->| 010101000010100 |
+       | 100000001111110 |   | Representation  |   | 100000001111110 |
+       +-----------------+   |   of Message    |   +-----------------+
+                |            +----------------=+             |
+                |                                            |
+                |           +-------------------+            |
+                +-----------|   Wire Protocol   |------------+
+                            | MMS/NAVDAT/AISASM |
+                            +-------------------+
+
+....
+
+An MSDL file is just an ordinary text file with a standardized syntax. Just to give you an idea of what a MSDL file looks like. Here is an example used in the EPD developed at DMA for route exchange.
+[source]
+----
+namespace dma.route;
+
+/** The heading of each leg. */
+enum HeadingType {
+    RHUMB_LINE = 1;
+    GREAT_CIRCLE = 2;
+}
+
+/** A waypoint in a route. */
+message Waypoint {
+
+    /** The position. */
+    1: position waypointPosition;
+
+    /** The planned or estimated time of arrival at the waypoint position. */
+    2: timestamp eta;
+
+    /** The rate of turn of the waypoint. In degrees */
+    3: float rot;
+
+    /** The turn radius of the vessel. In nautical miles. */
+    4: float turnRadius;
+    
+    /** The waypoints outleg, will be null for the final waypoint. */
+    5: Leg outleg;
+}
+
+endpoint TacticalRouteEndpoint {
+
+  void RouteSuggestion(
+    /** The suggested route */
+    1: Route route;
+    
+    /** The transaction ID */
+    2: int64 id;
+
+    /** The status, used for replying*/
+    3: RouteSuggestionStatus status;
+  );
+}
+----
+
+=== Messages
+=== Enums
+=== Broadcasts
+=== Endpoints
+
+=== Forward

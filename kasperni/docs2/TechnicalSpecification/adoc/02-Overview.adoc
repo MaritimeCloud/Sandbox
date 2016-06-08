@@ -1,0 +1,40 @@
+== Overview
+High level requirements
+Early on some high level requirements were defined for the framework:
+Provide additional communication means, initially utilizing Internet connectivity
+AIS ASM is the only general purpose communication mean available and not sufficient for the envisioned e-navigation services
+Internet TCP and UDP protocols are not sufficient for all communication needs (e.g. publish-subscribe)
+Service consumers must easily be able to discover provisioned services 
+Service providers must easily be able to advertise their provisioned services 
+All maritime actors must have a unique maritime ID with attached attributes as role and nationality, etc.
+Means for secure communication, that is
+Authenticity – Guarantee of who I am talking to 
+Integrity – Guarantee that data is unaltered 
+Confidentiality – Guarantee that data is not accessible by third party
+Guiding principles
+Influenced by the work on the SWIM concept within aviation a number of guiding principles for the framework was established
+Re-use not re-invent
+Utilize existing and proven Information and Communication Technology (ICT) concepts and practices. E.g. from
+Distributed systems
+Service-oriented architectures
+Software design patterns
+IT security
+Etc.
+Separation of information provision and consumption
+Actors are often both providers and consumers of information
+Not ideal to decide in advance who will need what information, obtained from whom and when
+Decoupling providers of information from the possible consumers allows the number and nature of providers and consumers to evolve through time
+Loose system coupling
+Modular design with loose coupling and high cohesion where components of systems have little or no knowledge of the definitions of other separate components. By doing this the barriers between systems and applications are removed, and interfaces are compatible. It allows for independent acquisition and composability of system components.
+Build on open standards
+Open standards means widely accepted and supported standards set by recognized standards organizations or the marketplace. These standards support interoperability, portability, and scalability and are equally available to the general public at no cost or with a moderate license fee.
+Facilitate Service Oriented Architectures (SOA)
+Driven by analysis of user needs, functionality is developed, packaged and implemented as a suite of interoperable services that can be used in a flexible way within multiple separate systems from several domains within the maritime world.
+
+
+
+=== Communication
+endpoints / broadcasts
+
+
+=== Text versus Binary
