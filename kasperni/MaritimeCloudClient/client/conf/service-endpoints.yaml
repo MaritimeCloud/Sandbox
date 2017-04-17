@@ -1,0 +1,5 @@
+destination:
+  - file:fileio/in/service
+types:
+  - testproject.Hello
+  - dma.messaging.MaritimeTextingService

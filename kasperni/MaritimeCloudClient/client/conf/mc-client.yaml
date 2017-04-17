@@ -1,0 +1,42 @@
+# Maritime Cloud config YAML 
+
+# NOTE:
+#   See http://wiki.apache.org/cassandra/StorageConfiguration for
+#   full explanations of configuration directives
+# /NOTE
+
+# The maritime id of the client
+id: mmsi:123456789
+
+# The name of the ship/client (Optional)
+#name: ShipName
+
+# The organization that the ship/client is part of (Optional)
+#organization: OrganizationName
+
+# The description of the client (Optional)
+#description: DooBar
+
+port : 9090
+
+mms:
+  host    : mms03.maritimecloud.net
+
+msdl:
+  location : ./msdl
+
+positionReader: 123.213, -123.12
+#positionReader: http://127.0.0.1/currentPosition
+#positionReader: file:///home/cloud/gps.file
+
+
+#defaultTimeout
+
+# The description of the client (Optional)
+#broadcast-subscriptions : ./conf/broadcast-subscriptions
+
+broadcast:
+
+  subscribe:
+    dk.dma : file:///asfd/sdfw/qwe
+  

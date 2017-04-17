@@ -1,0 +1,12 @@
+destination:
+  - file:fileio/in/broadcast
+types:
+  - testproject.HelloWorld
+  - testproject.HelloWorld
+---
+destination:
+ - file:fileio/in/broadcast
+ 
+types:
+  - testproject.HelloWorld
+  - testproject.HelloWorld

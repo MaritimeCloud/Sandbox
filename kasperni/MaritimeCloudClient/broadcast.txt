@@ -1,0 +1,6 @@
+{
+   "broadcastType" : "testproject.HelloWorld",
+   "broadcast" : {
+       "msg" : "Hej med Dig!!!\""
+   }
+}

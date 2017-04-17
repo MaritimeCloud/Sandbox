@@ -1,0 +1,4 @@
+{
+   "receiverId" : "mmsi:123",
+   "method" : "testproject.Hello.hi"
+}

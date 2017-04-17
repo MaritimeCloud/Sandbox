@@ -1,0 +1,5 @@
+Maritime Cloud Client
+Copyright 2012-2014 Danish Maritime Authorities
+
+This product includes software developed by The Apache Software
+Foundation (http://www.apache.org/).
